@@ -5,16 +5,19 @@
     <application
         android:allowBackup="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <!--android:icon="@mipmap/ic_launcher"-->
-        android:label="@string/app_name"
-        <!--android:roundIcon="@mipmap/ic_launcher_round"-->
-        <activity android:name=".SplashActivity">
-            <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/AppTheme"
+        android:icon="@drawable/vb_splash_logo"
+        android:roundIcon="@drawable/vb_splash_logo">
+
+        <activity android:name=".SplashActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.INTERNET"></action>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
