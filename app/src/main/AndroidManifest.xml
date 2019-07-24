@@ -6,8 +6,8 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:icon="@drawable/vb_splash_logo"
-        android:roundIcon="@drawable/vb_splash_logo"
+        android:icon="@drawable/xxxhdpi"
+        android:roundIcon="@drawable/xxxhdpi"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
         <activity android:name=".SplashActivity">

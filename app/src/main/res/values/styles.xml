@@ -15,5 +15,11 @@
         <item name="android:src">@drawable/main_page_background_black</item>
     </style>
 
+    <style name="editTextStyle">
+        <item name="android:textColorHighlight">@color/colorPrimary</item>
+        <item name="android:colorControlActivated">@color/colorPrimaryDark</item>
+        <item name="android:colorControlNormal">@color/colorAccent</item>
+    </style>
+
 
 </resources>

@@ -2,5 +2,9 @@
     <string name="app_name">VB Stajyer</string>
     <string name="pageBackGround">Ana Back Plan</string>
     <string name="allPageLogo">All Pages Logo</string>
+    <string name="editText2">E-mail</string>
+    <string name="editText3">Şifre</string>
+    <string name="button2">Kayıt Ol</string>
+    <string name="button3">Giriş Yap</string>
 
 </resources>
