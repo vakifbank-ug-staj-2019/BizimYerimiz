@@ -6,5 +6,9 @@
     <string name="editText3">Şifre</string>
     <string name="button2">Kayıt Ol</string>
     <string name="button3">Giriş Yap</string>
+    <string name="chatButton">Sohbet</string>
+    <string name="commandButton">Yorum Yap</string>
+
+
 
 </resources>
