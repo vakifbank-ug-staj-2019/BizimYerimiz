@@ -6,4 +6,9 @@
     <string name="passwordInput">Şifre</string>
     <string name="registerButton">Kayıt Ol</string>
     <string name="loginButton">Giriş Yap</string>
+    <string name="chatButton">Sohbet</string>
+    <string name="commandButton">Yorum Yap</string>
+
+
+
 </resources>
