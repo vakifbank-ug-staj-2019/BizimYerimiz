@@ -2,10 +2,10 @@
     <string name="app_name">VB Stajyer</string>
     <string name="pageBackGround">Ana Back Plan</string>
     <string name="allPageLogo">All Pages Logo</string>
-    <string name="editText2">E-mail</string>
-    <string name="editText3">Şifre</string>
-    <string name="button2">Kayıt Ol</string>
-    <string name="button3">Giriş Yap</string>
+    <string name="emailInput">E-mail</string>
+    <string name="passwordInput">Şifre</string>
+    <string name="registerButton">Kayıt Ol</string>
+    <string name="loginButton">Giriş Yap</string>
     <string name="chatButton">Sohbet</string>
     <string name="commandButton">Yorum Yap</string>
 
