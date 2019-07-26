@@ -45,13 +45,12 @@ public class MainActivity extends BaseActivity {
         fbaseAuth = FirebaseAuth.getInstance();
         fbaseUser = fbaseAuth.getCurrentUser();
 
-        /*
+
         if(fbaseUser != null){ // check user session
-            Intent i = new Intent(MainActivity.this,target Activity);
+            Intent i = new Intent(MainActivity.this, CommandActivity.class);
             startActivity(i);
             finish();
         }
-        */
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,10 +96,10 @@ public class MainActivity extends BaseActivity {
                                 }
                             });
 
-                            /*
-                            Intent i = new Intent(this,ProfileActivity.class);
+
+                            Intent i = new Intent(MainActivity.this,CommandActivity.class);
                             startActivity(i);
-                            finish();*/
+                            finish();
 
                         }
                         else{
