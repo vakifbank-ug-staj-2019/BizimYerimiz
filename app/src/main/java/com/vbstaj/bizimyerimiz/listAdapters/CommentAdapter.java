@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.vbstaj.bizimyerimiz.R;
 import com.vbstaj.bizimyerimiz.model.Comment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CommentAdapter extends ArrayAdapter<Comment> {
 
@@ -35,7 +37,11 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 
         commentContent.setText(allComments.get(position).getContent());
         commentUser.setText(allComments.get(position).getName());
-        commentDate.setText(allComments.get(position).getCreatedAt().toString());
+
+        Date tmpDate = allComments.get(position).getCreatedAt();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd.MM.YYYY");
+        commentDate.setText(simpleDateFormat.format(tmpDate));
 
         return rowView;
 
