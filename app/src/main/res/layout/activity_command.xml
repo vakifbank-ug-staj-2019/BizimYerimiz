@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDF6DD"
+    android:background="@color/colorPrimary"
     tools:context=".CommandActivity">
 
 
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="85dp"
-        android:layout_marginBottom="130dp"
+        android:layout_marginBottom="85dp"
         android:background="@android:color/white"
         android:paddingStart="16dp"
         android:paddingEnd="16dp" />
@@ -31,7 +31,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_shape_homebutton"
+            android:background="@color/colorPrimaryDark"
             android:text="@string/commandButton"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,8 +49,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_shape_homebutton"
-            android:text="log out"
+            android:background="@color/colorPrimaryDark"
+            android:text="yenile"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline4"
             app:layout_constraintVertical_bias="0.0" />
-
 
 
         <Button
@@ -69,7 +68,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_shape_homebutton"
+            android:background="@color/colorPrimaryDark"
             android:text="@string/chatButton"
             android:textColor="@android:color/white"
             android:textSize="14sp"
@@ -88,7 +87,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_shape_homebutton"
+            android:background="@color/colorPrimary"
             android:contentDescription="@string/chatButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,19 +97,13 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/vb_splash_logo" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="74dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_end="112dp" />
+            app:layout_constraintGuide_end="55dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
