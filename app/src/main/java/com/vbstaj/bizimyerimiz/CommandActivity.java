@@ -32,6 +32,7 @@ public class CommandActivity extends BaseActivity {
     private ImageButton out;
     private Button commentbutton;
     private CommentAdapter recyclerAdapter;
+    private int lastPos = -1;
 
     List<Comment> list;
     RecyclerView recycle;
@@ -67,6 +68,16 @@ public class CommandActivity extends BaseActivity {
 
             }
         });*/
+       recyclerAdapter.setOnItemClickListener(new CommentAdapter.OnItemClickListener() {
+           @Override
+           public void ItemClick(Comment comment, int pos) {
+               if(lastPos != -1 && lastPos != pos){
+                   recyclerAdapter.notifyItemChanged(lastPos);
+               }
+
+               lastPos = pos;
+           }
+       });
 
        out.setOnClickListener(new View.OnClickListener() {
             @Override

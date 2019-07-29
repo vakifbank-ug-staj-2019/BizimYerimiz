@@ -17,8 +17,13 @@ import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>{
 
-    List<Comment> list;
-    Context context;
+    private List<Comment> list;
+    private Context context;
+    private OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
 
     public CommentAdapter(List<Comment> list, Context context) {
         this.list = list;
@@ -36,45 +41,34 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
     }
 
     @Override
-    public void onBindViewHolder(MyHoder holder, int position) {
+    public void onBindViewHolder(final MyHoder holder, final int position) {
         Comment mylist = list.get(position);
         holder.name.setText(mylist.getName());
         holder.content.setText(mylist.getContent());
+
+        holder.content.setText(mylist.getContent().length() > 60 ? mylist.getContent().substring(0,60) : mylist.getContent());
+
         holder.title.setText(mylist.getTitle());
 
         Date tmpDate = mylist.getCreatedAt();
-
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd.MM.YYYY");
         holder.date.setText(simpleDateFormat.format(tmpDate));
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.content.setText(list.get(position).getContent());
+                listener.ItemClick(list.get(position),position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-
-        int arr = 0;
-
-        try{
-            if(list.size()==0){
-
-                arr = 0;
-
-            }
-            else{
-
-                arr=list.size();
-            }
-
-
-
-        }catch (Exception e){
-
-
-
-        }
-
-        return arr;
-
+        return list.size();
     }
+
 
     class MyHoder extends RecyclerView.ViewHolder{
         TextView name,title,content,date;
@@ -82,12 +76,17 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
 
         public MyHoder(View itemView) {
             super(itemView);
+
             name = (TextView) itemView.findViewById(R.id.userNameContent);
             title= (TextView) itemView.findViewById(R.id.titleContent);
             content= (TextView) itemView.findViewById(R.id.textContent);
             date= (TextView) itemView.findViewById(R.id.dateContent);
 
         }
+    }
+
+    public interface OnItemClickListener {
+        void ItemClick(Comment comment, int pos);
     }
 
 }
