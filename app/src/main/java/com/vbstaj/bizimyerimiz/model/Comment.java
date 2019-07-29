@@ -7,14 +7,14 @@ public class Comment {
     private String content;
     private String userID;
     private Date createdAt;
-
     private String title;
 
-    public Comment(String name,String content,String userID, Date createdAt){
+    public Comment(String name,String title, String content,String userID, Date createdAt){
         this.name = name;
         this.content = content;
         this.userID = userID;
         this.createdAt = createdAt;
+        this.title = title;
     }
 
     public Comment(){}
