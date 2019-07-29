@@ -88,25 +88,7 @@ public class MainActivity extends BaseActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
 
-
-                            DocumentReference docRef = databaseFirestore.collection("users").document(task.getResult().getUser().getUid());
-                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> userDoc) {
-                                    if (userDoc.isSuccessful()) {
-                                        DocumentSnapshot document = userDoc.getResult();
-                                        if (document.exists()) {
-                                            loggedUser = document.toObject(User.class);
-                                            String message=("Hosgeldin "+loggedUser.getName());
-                                            showMessage(message);
-                                        } else {
-                                            Log.d("asd", "No such document");
-                                        }
-                                    } else {
-                                        Log.d("asd", "get failed with ", userDoc.getException());
-                                    }
-                                }
-                            });
+                           loggedUser =  getUser(task.getResult().getUser().getUid());
 
 
                            Intent i = new Intent(MainActivity.this,CommandActivity.class);

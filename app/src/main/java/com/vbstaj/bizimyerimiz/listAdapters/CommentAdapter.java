@@ -1,49 +1,92 @@
 package com.vbstaj.bizimyerimiz.listAdapters;
 
-import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.vbstaj.bizimyerimiz.R;
 import com.vbstaj.bizimyerimiz.model.Comment;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class CommentAdapter extends ArrayAdapter<Comment> {
+public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>{
 
-    private final Activity context;
-    private final ArrayList<Comment> allComments;
+    private List<Comment> list;
+    private Context context;
+    private OnItemClickListener listener;
 
-    public CommentAdapter(Activity context, ArrayList<Comment> comment) {
-        super(context, R.layout.list_view_item, comment);
-
-        this.context=context;
-        this.allComments = comment;
-
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 
-    public View getView(int position,View view,ViewGroup parent) {
-        LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.list_view_item, null,true);
+    public CommentAdapter(List<Comment> list, Context context) {
+        this.list = list;
+        this.context = context;
+    }
 
-        TextView commentContent = (TextView) rowView.findViewById(R.id.textContent);
-        TextView commentUser = (TextView) rowView.findViewById(R.id.userNameContent);
-        TextView commentDate = (TextView) rowView.findViewById(R.id.dateContent);
+    @Override
+    public MyHoder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        commentContent.setText(allComments.get(position).getContent());
-        commentUser.setText(allComments.get(position).getName());
+        View view = LayoutInflater.from(context).inflate(R.layout.list_view_item,parent,false);
+        MyHoder myHoder = new MyHoder(view);
 
-        Date tmpDate = allComments.get(position).getCreatedAt();
 
+        return myHoder;
+    }
+
+    @Override
+    public void onBindViewHolder(final MyHoder holder, final int position) {
+        Comment mylist = list.get(position);
+        holder.name.setText(mylist.getName());
+        holder.content.setText(mylist.getContent());
+
+        holder.content.setText(mylist.getContent().length() > 60 ? mylist.getContent().substring(0,60) + "..." : mylist.getContent());
+
+        holder.title.setText(mylist.getTitle());
+
+        Date tmpDate = mylist.getCreatedAt();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd.MM.YYYY");
-        commentDate.setText(simpleDateFormat.format(tmpDate));
+        holder.date.setText(simpleDateFormat.format(tmpDate));
 
-        return rowView;
 
-    };
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.content.setText(list.get(position).getContent());
+                listener.ItemClick(list.get(position),position);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+
+    class MyHoder extends RecyclerView.ViewHolder{
+        TextView name,title,content,date;
+
+
+        public MyHoder(View itemView) {
+            super(itemView);
+
+            name = (TextView) itemView.findViewById(R.id.userNameContent);
+            title= (TextView) itemView.findViewById(R.id.titleContent);
+            content= (TextView) itemView.findViewById(R.id.textContent);
+            date= (TextView) itemView.findViewById(R.id.dateContent);
+
+        }
+    }
+
+    public interface OnItemClickListener {
+        void ItemClick(Comment comment, int pos);
+    }
+
 }
