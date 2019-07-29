@@ -46,7 +46,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
         holder.name.setText(mylist.getName());
         holder.content.setText(mylist.getContent());
 
-        holder.content.setText(mylist.getContent().length() > 60 ? mylist.getContent().substring(0,60) : mylist.getContent());
+        holder.content.setText(mylist.getContent().length() > 60 ? mylist.getContent().substring(0,60) + "..." : mylist.getContent());
 
         holder.title.setText(mylist.getTitle());
 
