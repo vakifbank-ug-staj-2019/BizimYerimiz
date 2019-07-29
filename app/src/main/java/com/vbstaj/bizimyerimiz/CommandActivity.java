@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -11,9 +12,6 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -25,34 +23,44 @@ import java.util.ArrayList;
 
 public class CommandActivity extends BaseActivity {
 
-    private Button button;
+    private Button refresh;
+    private ImageButton out;
+
     final ArrayList<Comment> allComments = new ArrayList<Comment>();
     ListView list;
 
     @Override
     public int getContentView() {
         return R.layout.activity_command;
-
     }
+
 
     @Override
     public void initView() {
 
-        button = (Button)findViewById(R.id.logoutButton);
+        refresh = (Button)findViewById(R.id.refreshButton);
+        out= (ImageButton) findViewById (R.id.hB);
         final CommentAdapter adapter = new CommentAdapter(this, allComments);
         list = (ListView) findViewById(R.id.listView);
         list.setAdapter(adapter);
 
-        button.setOnClickListener(new View.OnClickListener() {
+       /** refresh.setOnClickListener(new View.OnClickListener() {
+       //Burada yenile butonunun özellikleri verilecek.
+       @Override
+           public void onClick(View view) {
+
+
+            }
+        });*/
+
+       out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
                 fbaseAuth.signOut();
                 Intent i = new Intent(CommandActivity.this, MainActivity.class);
                 startActivity(i);
-                finish();*/
-
-                adapter.notifyDataSetChanged();
+                finish();
+                //adapter.notifyDataSetChanged();
             }
         });
 
