@@ -38,27 +38,34 @@ public class doCommentActivity extends BaseActivity {
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Date currentDate = new Date();
-                Comment comment = new Comment(loggedUser.getCensoredFullName(), commentTitle.getText().toString(), commentContent.getText().toString(), fbaseAuth.getUid(), currentDate);
+                if(!commentTitle.getText().toString().equals("") && !commentContent.getText().toString().equals("")){
+                    Date currentDate = new Date();
+                    String contentToPush = commentContent.getText().toString().replaceAll("\\s{2,}", " ").replaceAll("[\\n\\r]"," ");
+                    Comment comment = new Comment(loggedUser.getCensoredFullName(), commentTitle.getText().toString(), contentToPush, fbaseAuth.getUid(), currentDate);
+                    databaseFirestore.collection("comments")
+                            .add(comment)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Log.d("SUCCESS", "DocumentSnapshot written with ID: " + documentReference.getId());
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("FAIL", "Error adding document", e);
+                                }
+                            });
+                    Intent x = new Intent(doCommentActivity.this, CommandActivity.class);
+                    startActivity(x);
+                    finish();
+                }else{
+                    showMessage("Lütfen tüm alanları doldurunuz");
+                }
 
 
-                databaseFirestore.collection("comments")
-                        .add(comment)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d("SUCCESS", "DocumentSnapshot written with ID: " + documentReference.getId());
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w("FAIL", "Error adding document", e);
-                            }
-                        });
-                Intent x = new Intent(doCommentActivity.this, CommandActivity.class);
-                startActivity(x);
-                finish();
+
+
             }
         });
     }
