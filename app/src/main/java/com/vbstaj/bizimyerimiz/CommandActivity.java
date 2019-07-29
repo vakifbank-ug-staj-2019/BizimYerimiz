@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +23,7 @@ import com.vbstaj.bizimyerimiz.listAdapters.CommentAdapter;
 import com.vbstaj.bizimyerimiz.model.Comment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class CommandActivity extends BaseActivity {
@@ -26,9 +31,10 @@ public class CommandActivity extends BaseActivity {
     private Button refresh;
     private ImageButton out;
     private Button commentbutton;
+    private CommentAdapter recyclerAdapter;
 
-    final ArrayList<Comment> allComments = new ArrayList<Comment>();
-    ListView list;
+    List<Comment> list;
+    RecyclerView recycle;
 
     @Override
     public int getContentView() {
@@ -42,9 +48,16 @@ public class CommandActivity extends BaseActivity {
         refresh = (Button)findViewById(R.id.refreshButton);
         out= (ImageButton) findViewById (R.id.hB);
         commentbutton=(Button)findViewById(R.id.commandButton);
-        final CommentAdapter adapter = new CommentAdapter(this, allComments);
-        list = (ListView) findViewById(R.id.listView);
-        list.setAdapter(adapter);
+
+        recycle = (RecyclerView) findViewById(R.id.listView);
+        list = new ArrayList<Comment>();
+
+        recyclerAdapter = new CommentAdapter(list,this);
+        //RecyclerView.LayoutManager recyce = new GridLayoutManager(this,1);
+        RecyclerView.LayoutManager recyce = new LinearLayoutManager(this);
+        recycle.setLayoutManager(recyce);
+        recycle.setItemAnimator( new DefaultItemAnimator());
+        recycle.setAdapter(recyclerAdapter);
 
        /** refresh.setOnClickListener(new View.OnClickListener() {
        //Burada yenile butonunun özellikleri verilecek.
@@ -62,7 +75,6 @@ public class CommandActivity extends BaseActivity {
                 Intent i = new Intent(CommandActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();
-                //adapter.notifyDataSetChanged();
             }
         });
 
@@ -76,14 +88,6 @@ public class CommandActivity extends BaseActivity {
             }
         });
 
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                showMessage(allComments.get(i).getUserID());
-            }
-        });
-
         databaseFirestore.collection("comments").orderBy("createdAt", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -92,9 +96,9 @@ public class CommandActivity extends BaseActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Comment tmp_comment = document.toObject(Comment.class);
-                                allComments.add(tmp_comment);
+                                list.add(tmp_comment);
                             }
-                            adapter.notifyDataSetChanged();
+                            recycle.setAdapter(recyclerAdapter);
                         } else {
                             Log.d("error", "Error getting documents: ", task.getException());
                         }
