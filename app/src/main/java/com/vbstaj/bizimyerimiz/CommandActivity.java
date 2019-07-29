@@ -25,6 +25,7 @@ public class CommandActivity extends BaseActivity {
 
     private Button refresh;
     private ImageButton out;
+    private Button commentbutton;
 
     final ArrayList<Comment> allComments = new ArrayList<Comment>();
     ListView list;
@@ -40,6 +41,7 @@ public class CommandActivity extends BaseActivity {
 
         refresh = (Button)findViewById(R.id.refreshButton);
         out= (ImageButton) findViewById (R.id.hB);
+        commentbutton=(Button)findViewById(R.id.commandButton);
         final CommentAdapter adapter = new CommentAdapter(this, allComments);
         list = (ListView) findViewById(R.id.listView);
         list.setAdapter(adapter);
@@ -61,6 +63,16 @@ public class CommandActivity extends BaseActivity {
                 startActivity(i);
                 finish();
                 //adapter.notifyDataSetChanged();
+            }
+        });
+
+        commentbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent y = new Intent(CommandActivity.this, doCommentActivity.class);
+                startActivity(y);
+
             }
         });
 
