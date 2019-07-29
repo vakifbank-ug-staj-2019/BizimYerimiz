@@ -9,7 +9,9 @@
     <string name="chatButton">Sohbet</string>
     <string name="commandButton">Yorum Yap</string>
     <string name="refreshButton">Yenile</string>
-
+    <string name="addcomment">Başlık</string>
+    <string name="addcommenttext">Yorumunu yaz...</string>
+    <string name="addcommentbutton">Gönder</string>
 
 
 </resources>
