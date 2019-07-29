@@ -62,7 +62,11 @@ public class MainActivity extends BaseActivity {
                 if (userEmail.isEmpty() || userPassword.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Lütfen gerekli alanları doldurunuz!", Toast.LENGTH_SHORT).show();
                 } else {
-                    loginFunc(userEmail,userPassword);
+                    if(!userEmail.matches("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$")){
+                        showMessage("Lütfen geçerli e-posta giriniz.");
+                    }else {
+                        loginFunc(userEmail,userPassword);
+                    }
                 }
             }
         });
