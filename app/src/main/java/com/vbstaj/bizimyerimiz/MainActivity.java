@@ -23,8 +23,7 @@ public class MainActivity extends BaseActivity {
     private EditText emailField;
     private EditText passwordField;
     private Button loginButton;
-    private Button registerButton;
-
+    private Button register;
 
 
     private FirebaseAuth fbaseAuth;
@@ -42,7 +41,7 @@ public class MainActivity extends BaseActivity {
         emailField = (EditText)findViewById(R.id.emailInput);
         passwordField = (EditText)findViewById(R.id.passwordInput);
         loginButton = (Button)findViewById(R.id.loginButton);
-        registerButton = (Button)findViewById(R.id.registerButton);
+        register = (Button) findViewById(R.id.registerButton);
 
 
         fbaseAuth = FirebaseAuth.getInstance();
@@ -54,7 +53,7 @@ public class MainActivity extends BaseActivity {
             startActivity(i);
             finish();
         }
-
+       /**Giriş Yap butonunu çalıştırır.*/
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +64,16 @@ public class MainActivity extends BaseActivity {
                 } else {
                     loginFunc(userEmail,userPassword);
                 }
+            }
+        });
+
+
+        /**Kayıt ol Butonunu çalıştırır.*/
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent u = new Intent(MainActivity.this,createaccountActivity.class);
+               startActivity(u);
             }
         });
 
