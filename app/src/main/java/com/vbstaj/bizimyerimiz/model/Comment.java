@@ -8,6 +8,8 @@ public class Comment {
     private String userID;
     private Date createdAt;
 
+    private String title;
+
     public Comment(String name,String content,String userID, Date createdAt){
         this.name = name;
         this.content = content;
@@ -16,6 +18,9 @@ public class Comment {
     }
 
     public Comment(){}
+
+
+    public String getTitle() { return title; }
 
     public String getName() {
         return name;

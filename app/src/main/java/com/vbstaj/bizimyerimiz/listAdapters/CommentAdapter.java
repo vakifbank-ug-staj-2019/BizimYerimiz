@@ -34,9 +34,11 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
         TextView commentContent = (TextView) rowView.findViewById(R.id.textContent);
         TextView commentUser = (TextView) rowView.findViewById(R.id.userNameContent);
         TextView commentDate = (TextView) rowView.findViewById(R.id.dateContent);
+        TextView commentTitle = (TextView) rowView.findViewById(R.id.titleContent);
 
         commentContent.setText(allComments.get(position).getContent());
         commentUser.setText(allComments.get(position).getName());
+        commentTitle.setText(allComments.get(position).getTitle());
 
         Date tmpDate = allComments.get(position).getCreatedAt();
 
