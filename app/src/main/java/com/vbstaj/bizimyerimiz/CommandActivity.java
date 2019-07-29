@@ -60,14 +60,28 @@ public class CommandActivity extends BaseActivity {
         recycle.setItemAnimator( new DefaultItemAnimator());
         recycle.setAdapter(recyclerAdapter);
 
-       /** refresh.setOnClickListener(new View.OnClickListener() {
-       //Burada yenile butonunun özellikleri verilecek.
-       @Override
+       refresh.setOnClickListener(new View.OnClickListener() {
+           @Override
            public void onClick(View view) {
-
-
-            }
-        });*/
+               list.clear();
+               databaseFirestore.collection("comments").orderBy("createdAt", Query.Direction.DESCENDING)
+                       .get()
+                       .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                           @Override
+                           public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                               if (task.isSuccessful()) {
+                                   for (QueryDocumentSnapshot document : task.getResult()) {
+                                       Comment tmp_comment = document.toObject(Comment.class);
+                                       list.add(tmp_comment);
+                                   }
+                                   recycle.setAdapter(recyclerAdapter);
+                               } else {
+                                   Log.d("error", "Error getting documents: ", task.getException());
+                               }
+                           }
+                       });
+           }
+       });
        recyclerAdapter.setOnItemClickListener(new CommentAdapter.OnItemClickListener() {
            @Override
            public void ItemClick(Comment comment, int pos) {
@@ -95,6 +109,7 @@ public class CommandActivity extends BaseActivity {
 
                 Intent y = new Intent(CommandActivity.this, doCommentActivity.class);
                 startActivity(y);
+                finish();
 
             }
         });
