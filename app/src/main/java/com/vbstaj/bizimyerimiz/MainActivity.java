@@ -25,6 +25,8 @@ public class MainActivity extends BaseActivity {
     private Button loginButton;
     private Button registerButton;
 
+
+
     private FirebaseAuth fbaseAuth;
     private FirebaseUser fbaseUser;
 
@@ -41,6 +43,7 @@ public class MainActivity extends BaseActivity {
         passwordField = (EditText)findViewById(R.id.passwordInput);
         loginButton = (Button)findViewById(R.id.loginButton);
         registerButton = (Button)findViewById(R.id.registerButton);
+
 
         fbaseAuth = FirebaseAuth.getInstance();
         fbaseUser = fbaseAuth.getCurrentUser();
@@ -67,7 +70,6 @@ public class MainActivity extends BaseActivity {
 
     }
 
-
     public void loginFunc(String userName,String userPassword) {
 
         Log.d("variables", userName + ">>>" + userPassword);
@@ -86,7 +88,8 @@ public class MainActivity extends BaseActivity {
                                         DocumentSnapshot document = userDoc.getResult();
                                         if (document.exists()) {
                                             loggedUser = document.toObject(User.class);
-                                            showMessage(loggedUser.getCensoredFullName());
+                                            String message=("Hosgeldin "+loggedUser.getName());
+                                            showMessage(message);
                                         } else {
                                             Log.d("asd", "No such document");
                                         }
@@ -97,7 +100,7 @@ public class MainActivity extends BaseActivity {
                             });
 
 
-                            Intent i = new Intent(MainActivity.this,CommandActivity.class);
+                           Intent i = new Intent(MainActivity.this,CommandActivity.class);
                             startActivity(i);
                             finish();
 
