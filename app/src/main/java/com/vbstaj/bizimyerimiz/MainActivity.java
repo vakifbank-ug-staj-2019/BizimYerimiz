@@ -24,6 +24,7 @@ public class MainActivity extends BaseActivity {
     private EditText passwordField;
     private Button loginButton;
     private Button register;
+    private Button resetPassword;
 
 
     private FirebaseAuth fbaseAuth;
@@ -42,6 +43,7 @@ public class MainActivity extends BaseActivity {
         passwordField = (EditText)findViewById(R.id.passwordInput);
         loginButton = (Button)findViewById(R.id.loginButton);
         register = (Button) findViewById(R.id.registerButton);
+        resetPassword = (Button) findViewById(R.id.forgotPassword);
 
 
         fbaseAuth = FirebaseAuth.getInstance();
@@ -70,6 +72,11 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+
+        resetPassword.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this,ForgotPassword.class));
+            finish();
+        });
 
         /**Kayıt ol Butonunu çalıştırır.*/
         register.setOnClickListener(new View.OnClickListener() {
