@@ -5,12 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@android:color/white">
 
-    <ImageView
-        android:id="@+id/pageBackGround"
-        android:contentDescription="@string/pageBackGround"
-        style="@style/pageBackGround" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,10 +27,10 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_shape"
             android:text="@string/loginButton"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.544"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/passwordInput"
             app:layout_constraintVertical_bias="0.0" />
@@ -42,17 +39,17 @@
             android:id="@+id/registerButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/registerButton"
             android:background="@drawable/bg_shape"
-            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:text="@string/registerButton"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintHorizontal_bias="0.411"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordInput"
             app:layout_constraintVertical_bias="0.0" />
@@ -78,40 +75,45 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:contentDescription="@string/allPageLogo"
             android:foregroundGravity="center"
-            android:src="@drawable/vakifbank_logo"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/loggo2"
+            app:layout_constraintBottom_toTopOf="@+id/emailInput"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.00" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <EditText
             android:id="@+id/emailInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/edittext_design"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/emailInput"
             android:inputType="textEmailAddress"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/passwordInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/edittext_design"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/passwordInput"

@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity {
         });
 
     }
-
+    /** Giriş yap butonuna tıklandıktan sonra eğer userEmail ve userPassword boş değilse bu fonksiyon çalışacak*/
     public void loginFunc(String userName,String userPassword) {
 
         Log.d("variables", userName + ">>>" + userPassword);
@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity {
 
                         }
                         else{
-                            Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Lütfen ilgili alanları doğru doldurunuz",Toast.LENGTH_LONG).show();
                         }
                     }
 
