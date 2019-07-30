@@ -9,8 +9,8 @@ public class Comment {
     private Date createdAt;
     private String title;
 
-    public Comment(String name,String title, String content,String userID, Date createdAt){
-        this.name = name;
+    public Comment(String name,String surname,String title, String content,String userID, Date createdAt){
+        this.name = getCensoredFullName(name,surname);
         this.content = content;
         this.userID = userID;
         this.createdAt = createdAt;
@@ -36,5 +36,13 @@ public class Comment {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public String makeItCensored(String text){
+        return text.replaceAll("\\B.", "*");
+    }
+
+    private String getCensoredFullName(String name,String surname){
+        return makeItCensored(name.trim()) + " " + makeItCensored(surname.trim());
     }
 }

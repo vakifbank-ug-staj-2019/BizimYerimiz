@@ -27,12 +27,4 @@ public class User {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-
-    public String makeItCensored(String text){
-        return text.replaceAll("\\B.", "*");
-    }
-
-    public String getCensoredFullName(){
-        return makeItCensored(this.name.trim()) + " " + makeItCensored(this.surname.trim());
-    }
 }

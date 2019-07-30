@@ -47,7 +47,6 @@ public class MainActivity extends BaseActivity {
         fbaseAuth = FirebaseAuth.getInstance();
         fbaseUser = fbaseAuth.getCurrentUser();
 
-
         if(fbaseUser != null){ // check user session
             Intent i = new Intent(MainActivity.this, CommandActivity.class);
             startActivity(i);

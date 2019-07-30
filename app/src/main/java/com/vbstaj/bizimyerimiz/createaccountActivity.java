@@ -1,27 +1,20 @@
 package com.vbstaj.bizimyerimiz;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.util.Log;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.vbstaj.bizimyerimiz.listAdapters.CommentAdapter;
-import com.vbstaj.bizimyerimiz.model.Comment;
-
-import java.util.ArrayList;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.vbstaj.bizimyerimiz.model.User;
 
 public class createaccountActivity extends BaseActivity {
 
@@ -36,6 +29,9 @@ public class createaccountActivity extends BaseActivity {
 
     @Override
     public void initView() {
+
+
+        fbaseAuth = FirebaseAuth.getInstance();
 
         regName = (EditText)findViewById(R.id.userName);
         regSurname = (EditText)findViewById(R.id.surName);
@@ -60,6 +56,37 @@ public class createaccountActivity extends BaseActivity {
                     showMessage("Şifre alanları boş bırakılamaz.");
                 }else if(!regPassword.getText().toString().equals(regRePassword.getText().toString())){
                     showMessage("Şifreler aynı olmalıdır.");
+                }else{
+                    fbaseAuth.createUserWithEmailAndPassword(regEmail.getText().toString(),regPassword.getText().toString())
+                            .addOnCompleteListener(createaccountActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        String registeredID = task.getResult().getUser().getUid();
+                                        User registeredUser = new User(regName.getText().toString(),regSurname.getText().toString());
+                                        databaseFirestore.collection("users").document(registeredID)
+                                                .set(registeredUser)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        showMessage("Üyeliğiniz başarıyla oluşturulmuştur.");
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        showMessage("Bir hata oluştu.");
+                                                    }
+                                                });
+                                        startActivity(new Intent(createaccountActivity.this, MainActivity.class));
+                                        finish();
+                                    }
+                                    else {
+                                        showMessage("Bir hata oluştu. Lütfen tekrar deneyiniz.");
+                                    }
+
+                                }
+                            });
                 }
 
             }
