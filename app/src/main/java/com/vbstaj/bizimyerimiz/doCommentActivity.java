@@ -30,7 +30,7 @@ public class doCommentActivity extends BaseActivity {
     @Override
     public void initView() {
 
-        loggedUser =  getUser(fbaseAuth.getUid());
+        loggedUser =  getUser(fbaseAuth.getCurrentUser().getUid());
         commentButton = (Button)findViewById(R.id.commentButton);
         commentTitle = (EditText)findViewById(R.id.commentTitle);
         commentContent = (EditText)findViewById(R.id.commentContent);
@@ -41,7 +41,7 @@ public class doCommentActivity extends BaseActivity {
                 if(!commentTitle.getText().toString().equals("") && !commentContent.getText().toString().equals("")){
                     Date currentDate = new Date();
                     String contentToPush = commentContent.getText().toString().replaceAll("\\s{2,}", " ").replaceAll("[\\n\\r]"," ");
-                    Comment comment = new Comment(loggedUser.getCensoredFullName(), commentTitle.getText().toString(), contentToPush, fbaseAuth.getUid(), currentDate);
+                    Comment comment = new Comment(loggedUser.getName(),loggedUser.getSurname(), commentTitle.getText().toString(), contentToPush, fbaseAuth.getUid(), currentDate);
                     databaseFirestore.collection("comments")
                             .add(comment)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

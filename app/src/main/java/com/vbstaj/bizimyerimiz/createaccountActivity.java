@@ -70,8 +70,6 @@ public class createaccountActivity extends BaseActivity {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
                                                         showMessage("Üyeliğiniz başarıyla oluşturulmuştur.");
-                                                        fbaseAuth.signOut();
-                                                        fbaseUser = null;
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
