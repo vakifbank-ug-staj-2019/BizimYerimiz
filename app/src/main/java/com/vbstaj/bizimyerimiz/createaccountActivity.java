@@ -82,7 +82,7 @@ public class createaccountActivity extends BaseActivity {
                                         finish();
                                     }
                                     else {
-                                        showMessage("Bir hata oluştu. Lütfen tekrar deneyiniz.");
+                                        showMessage("Daha önceden bu eposta ile hesap oluşturulmuş");
                                     }
 
                                 }
