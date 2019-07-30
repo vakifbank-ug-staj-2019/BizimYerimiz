@@ -11,6 +11,7 @@
     <string name="refreshButton">Yenile</string>
     <string name="addcomment">Başlık</string>
     <string name="addcommenttext">Yorumunu yaz...</string>
+    <string name="logoutButton">Çıkış Yap</string>
     <string name="addcommentbutton">Gönder</string>
     <string name="loginName">Ad</string>
     <string name="loginSurname">Soyad</string>
@@ -18,6 +19,8 @@
     <string name="password">Şifre</string>
     <string name="rePassword">Şifre Tekrar</string>
     <string name="createaccount">Oluştur</string>
+    <string name="cancel">İptal</string>
+    <string name="resetPassword">Şifre Sıfırla</string>
 
 
 </resources>

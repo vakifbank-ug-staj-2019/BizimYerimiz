@@ -27,7 +27,7 @@ import java.util.List;
 public class CommandActivity extends BaseActivity {
 
     private Button refresh;
-    private ImageButton out;
+    private Button out;
     private Button commentbutton;
     private CommentAdapter recyclerAdapter;
     private int lastPos = -1;
@@ -45,7 +45,7 @@ public class CommandActivity extends BaseActivity {
     public void initView() {
 
         refresh = (Button)findViewById(R.id.refreshButton);
-        out= (ImageButton) findViewById (R.id.hB);
+        out= (Button) findViewById (R.id.out);
         commentbutton=(Button)findViewById(R.id.commandButton);
 
         recycle = (RecyclerView) findViewById(R.id.listView);
