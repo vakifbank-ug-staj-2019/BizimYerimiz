@@ -1,10 +1,13 @@
 package com.vbstaj.bizimyerimiz;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,6 +57,7 @@ public class MainActivity extends BaseActivity {
             startActivity(i);
             finish();
         }
+        displayData();
        /**Giriş Yap butonunu çalıştırır.*/
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +101,7 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-
+                            saveinfo();
                            loggedUser =  getUser(task.getResult().getUser().getUid());
 
 
@@ -113,4 +117,27 @@ public class MainActivity extends BaseActivity {
 
                 });
     }
+    //email password kaydı
+    public void saveinfo(){
+        SharedPreferences sharedPref=getSharedPreferences("Userinfo", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor=sharedPref.edit();
+        editor.putString("email",emailField.getText().toString());
+        editor.putString("password",passwordField.getText().toString());
+        editor.apply();
+    }
+///kaydedilen email ve passwordu yazdırma
+
+    public void displayData()
+    {
+        SharedPreferences sharedPref=getSharedPreferences("Userinfo", Context.MODE_PRIVATE);
+
+        String email=sharedPref.getString("email","");
+        String pv=sharedPref.getString("password","");
+        emailField.setText(email);
+        passwordField.setText(pv);
+    }
 }
+
+
+
