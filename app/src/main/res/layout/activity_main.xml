@@ -112,9 +112,9 @@
             android:gravity="center"
             android:hint="@string/emailInput"
             android:inputType="textEmailAddress"
+            android:saveEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
             app:layout_constraintVertical_bias="0.0" />
@@ -133,6 +133,7 @@
             android:hint="@string/passwordInput"
             android:inputType="numberPassword"
             android:maxLength="6"
+            android:saveEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
