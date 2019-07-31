@@ -42,9 +42,9 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
 
-        emailField = (EditText)findViewById(R.id.emailInput);
-        passwordField = (EditText)findViewById(R.id.passwordInput);
-        loginButton = (Button)findViewById(R.id.loginButton);
+        emailField = (EditText) findViewById(R.id.emailInput);
+        passwordField = (EditText) findViewById(R.id.passwordInput);
+        loginButton = (Button) findViewById(R.id.loginButton);
         register = (Button) findViewById(R.id.registerButton);
         resetPassword = (Button) findViewById(R.id.forgotPassword);
 
@@ -52,13 +52,11 @@ public class MainActivity extends BaseActivity {
         fbaseAuth = FirebaseAuth.getInstance();
         fbaseUser = fbaseAuth.getCurrentUser();
 
-        if(fbaseUser != null){ // check user session
-            Intent i = new Intent(MainActivity.this, CommandActivity.class);
-            startActivity(i);
-            finish();
+        if (fbaseUser != null) { // check user session
+            getLoginUser(fbaseAuth.getUid());
         }
         displayData();
-       /**Giriş Yap butonunu çalıştırır.*/
+        /**Giriş Yap butonunu çalıştırır.*/
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,10 +65,10 @@ public class MainActivity extends BaseActivity {
                 if (userEmail.isEmpty() || userPassword.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Lütfen gerekli alanları doldurunuz!", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(!userEmail.matches("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$")){
+                    if (!userEmail.matches("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$")) {
                         showMessage("Lütfen geçerli e-posta giriniz.");
-                    }else {
-                        loginFunc(userEmail,userPassword);
+                    } else {
+                        loginFunc(userEmail, userPassword);
                     }
                 }
             }
@@ -78,7 +76,7 @@ public class MainActivity extends BaseActivity {
 
 
         resetPassword.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this,ForgotPassword.class));
+            startActivity(new Intent(MainActivity.this, ForgotPassword.class));
             finish();
         });
 
@@ -86,57 +84,84 @@ public class MainActivity extends BaseActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent u = new Intent(MainActivity.this,createaccountActivity.class);
-               startActivity(u);
+                Intent u = new Intent(MainActivity.this, createaccountActivity.class);
+                startActivity(u);
             }
         });
 
     }
-    /** Giriş yap butonuna tıklandıktan sonra eğer userEmail ve userPassword boş değilse bu fonksiyon çalışacak*/
-    public void loginFunc(String userName,String userPassword) {
+
+    /**
+     * Giriş yap butonuna tıklandıktan sonra eğer userEmail ve userPassword boş değilse bu fonksiyon çalışacak
+     */
+    public void loginFunc(String userName, String userPassword) {
 
         Log.d("variables", userName + ">>>" + userPassword);
-        fbaseAuth.signInWithEmailAndPassword(userName,userPassword).addOnCompleteListener(this,
+        fbaseAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(this,
                 new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             saveinfo();
-                           loggedUser =  getUser(task.getResult().getUser().getUid());
+                            getLoginUser(task.getResult().getUser().getUid());
 
-
-                           Intent i = new Intent(MainActivity.this,CommandActivity.class);
+                            Intent i = new Intent(MainActivity.this, CommandActivity.class);
                             startActivity(i);
                             finish();
 
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),"Lütfen ilgili alanları doğru doldurunuz",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Lütfen ilgili alanları doğru doldurunuz", Toast.LENGTH_LONG).show();
                         }
                     }
 
                 });
     }
-    //email password kaydı
-    public void saveinfo(){
-        SharedPreferences sharedPref=getSharedPreferences("Userinfo", Context.MODE_PRIVATE);
 
-        SharedPreferences.Editor editor=sharedPref.edit();
-        editor.putString("email",emailField.getText().toString());
-        editor.putString("password",passwordField.getText().toString());
+    //email password kaydı
+    public void saveinfo() {
+        SharedPreferences sharedPref = getSharedPreferences("Userinfo", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("email", emailField.getText().toString());
+        editor.putString("password", passwordField.getText().toString());
         editor.apply();
     }
 ///kaydedilen email ve passwordu yazdırma
 
-    public void displayData()
-    {
-        SharedPreferences sharedPref=getSharedPreferences("Userinfo", Context.MODE_PRIVATE);
+    public void displayData() {
+        SharedPreferences sharedPref = getSharedPreferences("Userinfo", Context.MODE_PRIVATE);
 
-        String email=sharedPref.getString("email","");
-        String pv=sharedPref.getString("password","");
+        String email = sharedPref.getString("email", "");
+        String pv = sharedPref.getString("password", "");
         emailField.setText(email);
         passwordField.setText(pv);
     }
+
+
+    public void getLoginUser(String id) {
+        DocumentReference docRef = databaseFirestore.collection("users").document(id);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> userDoc) {
+                if (userDoc.isSuccessful()) {
+                    DocumentSnapshot document = userDoc.getResult();
+                    if (document.exists()) {
+                        loggedUser = document.toObject(User.class);
+                        Intent i = new Intent(MainActivity.this, CommandActivity.class);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        Log.d("asd", "No such document");
+                    }
+                } else {
+                    Log.d("asd", "get failed with ", userDoc.getException());
+                }
+            }
+        });
+
+    }
+
+    ;
 }
 
 

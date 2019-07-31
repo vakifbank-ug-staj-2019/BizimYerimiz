@@ -55,6 +55,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
         holder.date.setText(simpleDateFormat.format(tmpDate));
 
 
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
