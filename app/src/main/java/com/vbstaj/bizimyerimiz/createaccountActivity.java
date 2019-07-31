@@ -16,6 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.vbstaj.bizimyerimiz.model.User;
 
+import java.util.Date;
+
 public class createaccountActivity extends BaseActivity {
 
     private EditText regName,regSurname,regEmail,regPassword,regRePassword;
@@ -63,7 +65,15 @@ public class createaccountActivity extends BaseActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         String registeredID = task.getResult().getUser().getUid();
-                                        User registeredUser = new User(regName.getText().toString(),regSurname.getText().toString());
+                                        User registeredUser = new User(
+                                                regName.getText().toString(),
+                                                regSurname.getText().toString(),
+                                                Date birthdate, Date registeredAt,
+                                                Boolean gender,
+                                                String city, String email,
+                                                String linkedinUsername,
+                                                String phoneNumber);
+
                                         databaseFirestore.collection("users").document(registeredID)
                                                 .set(registeredUser)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
