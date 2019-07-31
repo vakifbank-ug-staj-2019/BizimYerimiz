@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity {
         fbaseUser = fbaseAuth.getCurrentUser();
 
         if (fbaseUser != null) { // check user session
-            getLoginUser(fbaseAuth.getUid());
+            getLoginUser(fbaseAuth.getCurrentUser().getUid());
         }
         displayData();
         /**Giriş Yap butonunu çalıştırır.*/

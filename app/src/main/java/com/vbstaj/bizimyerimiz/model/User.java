@@ -6,7 +6,7 @@ public class User {
 
     private String name;
     private String surname;
-    private boolean isAdmin;
+    private boolean admin;
     private Date birthdate;
     private Date registeredAt;
     private boolean gender; //0 for female 1 for male
@@ -20,7 +20,7 @@ public class User {
     public User(String name, String surname, Date birthdate, Date registeredAt, Boolean gender, String city, String email, String linkedinUsername, String phoneNumber,Boolean isAdmin) {
         this.name = name;
         this.surname = surname;
-        this.isAdmin = isAdmin;
+        this.admin = isAdmin;
         this.birthdate = birthdate;
         this.registeredAt = registeredAt;
         this.gender = gender;
@@ -41,7 +41,7 @@ public class User {
     }
 
     public boolean isAdmin() {
-        return isAdmin;
+        return this.admin;
     }
 
     public Date getBirthdate() {
@@ -81,7 +81,7 @@ public class User {
     }
 
     public void setAdmin(boolean admin) {
-        isAdmin = admin;
+        admin = admin;
     }
 
     public void setBirthdate(Date birthdate) {

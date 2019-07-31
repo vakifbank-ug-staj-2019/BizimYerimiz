@@ -61,7 +61,10 @@ public class CommandActivity extends BaseActivity {
         recycle.setItemAnimator( new DefaultItemAnimator());
         recycle.setAdapter(recyclerAdapter);
 
-        if(!loggedUser.isAdmin()){
+
+        String admin = loggedUser.isAdmin() ? "admin" : "admin degil";
+        showMessage(admin);
+        if(loggedUser.isAdmin()){
             commentbutton.setVisibility(View.GONE);
             userListButton.setVisibility(View.VISIBLE);
         }else{

@@ -57,7 +57,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
         holder.birthdate.setText(onlyDate.format(fullDate));
 
         // AGE
-        holder.age.setText("22");
+        holder.age.setText("(22)");
 
         holder.city.setText(mylist.getCity());
 
@@ -68,7 +68,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
         holder.linkedin.setText(mylist.getLinkedinUsername());
 
         holder.registerdate.setText(onlyDate.format(mylist.getRegisteredAt()));
-
 
         holder.itemView.setOnClickListener(view -> {
             holder.sectionsToHide.setVisibility(View.VISIBLE);
