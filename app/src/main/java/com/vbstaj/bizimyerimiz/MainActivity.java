@@ -29,10 +29,6 @@ public class MainActivity extends BaseActivity {
     private Button register;
     private Button resetPassword;
 
-
-    private FirebaseAuth fbaseAuth;
-    private FirebaseUser fbaseUser;
-
     @Override
     public int getContentView() {
         return R.layout.activity_main;
@@ -104,11 +100,6 @@ public class MainActivity extends BaseActivity {
                         if (task.isSuccessful()) {
                             saveinfo();
                             getLoginUser(task.getResult().getUser().getUid());
-
-                            Intent i = new Intent(MainActivity.this, CommandActivity.class);
-                            startActivity(i);
-                            finish();
-
                         } else {
                             Toast.makeText(getApplicationContext(), "Lütfen ilgili alanları doğru doldurunuz", Toast.LENGTH_LONG).show();
                         }
