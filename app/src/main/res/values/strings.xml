@@ -21,6 +21,13 @@
     <string name="createaccount">Oluştur</string>
     <string name="cancel">İptal</string>
     <string name="resetPassword">Şifre Sıfırla</string>
+    <string name="Geri">Geri</string>
+    <string name="date">Doğum Tarihi</string>
+    <string name="country">Yaşadığınız İl</string>
+    <string name="phoneNumber">Telefon Numarası</string>
+    <string name="linkedIn">Linkedin Kullanıcı Adı</string>
+
+
 
 
 </resources>
