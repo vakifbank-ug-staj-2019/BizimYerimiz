@@ -16,11 +16,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.vbstaj.bizimyerimiz.model.User;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class createaccountActivity extends BaseActivity {
 
-    private EditText regName,regSurname,regEmail,regPassword,regRePassword;
+    private EditText regName,regSurname,regEmail,regPassword,regRePassword,regBDate,regCity,regPhone,regLinkedin;
     private Button createaccount;
 
     @Override
@@ -41,6 +43,10 @@ public class createaccountActivity extends BaseActivity {
         regPassword = (EditText)findViewById(R.id.password);
         regRePassword = (EditText)findViewById(R.id.repassword);
         createaccount = (Button)findViewById(R.id.createaccount);
+        regBDate = (EditText) findViewById(R.id.date);
+        regCity = (EditText) findViewById(R.id.country);
+        regPhone = (EditText) findViewById(R.id.phoneNumber);
+        regLinkedin = (EditText) findViewById(R.id.linkedIn);
 
 
         createaccount.setOnClickListener(new View.OnClickListener() {
@@ -58,21 +64,30 @@ public class createaccountActivity extends BaseActivity {
                     showMessage("Şifre alanları boş bırakılamaz.");
                 }else if(!regPassword.getText().toString().equals(regRePassword.getText().toString())){
                     showMessage("Şifreler aynı olmalıdır.");
+                }else if(regBDate.getText().toString().equals("")){
+                    showMessage("Doğum tarihi boş bırakılamaz");
+                }else if(regCity.getText().toString().equals("")){
+                    showMessage("Yaşadığınız il boş bırakılamaz");
+                }else if(regPhone.getText().toString().equals("")){
+                    showMessage("Telefon numaranızı giriniz");
+                }else if(regLinkedin.getText().toString().equals("")){
+                    showMessage("Linkedin kullanıcı adınızı giriniz.");
                 }else{
                     fbaseAuth.createUserWithEmailAndPassword(regEmail.getText().toString(),regPassword.getText().toString())
                             .addOnCompleteListener(createaccountActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
+                                        SimpleDateFormat onlyDate = new SimpleDateFormat("dd/MM/yy");
+                                        Date currentDate = new Date();
+                                        Date bDate = null;
+                                        try {
+                                            bDate = onlyDate.parse(regBDate.getText().toString());
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
                                         String registeredID = task.getResult().getUser().getUid();
-                                        User registeredUser = new User(
-                                                regName.getText().toString(),
-                                                regSurname.getText().toString(),
-                                                Date birthdate, Date registeredAt,
-                                                Boolean gender,
-                                                String city, String email,
-                                                String linkedinUsername,
-                                                String phoneNumber);
+                                        User registeredUser = new User(regName.getText().toString(), regSurname.getText().toString(), bDate, currentDate, true, regCity.getText().toString(), regEmail.getText().toString(), regLinkedin.getText().toString(), regPhone.getText().toString(),false);
 
                                         databaseFirestore.collection("users").document(registeredID)
                                                 .set(registeredUser)

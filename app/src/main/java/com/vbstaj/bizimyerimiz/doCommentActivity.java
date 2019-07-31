@@ -35,38 +35,25 @@ public class doCommentActivity extends BaseActivity {
         commentTitle = (EditText)findViewById(R.id.commentTitle);
         commentContent = (EditText)findViewById(R.id.commentContent);
 
-        commentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!commentTitle.getText().toString().equals("") && !commentContent.getText().toString().equals("")){
-                    Date currentDate = new Date();
-                    String contentToPush = commentContent.getText().toString().replaceAll("\\s{2,}", " ").replaceAll("[\\n\\r]"," ");
-                    Comment comment = new Comment(loggedUser.getName(),loggedUser.getSurname(), commentTitle.getText().toString(), contentToPush, fbaseAuth.getUid(), currentDate);
-                    databaseFirestore.collection("comments")
-                            .add(comment)
-                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    Log.d("SUCCESS", "DocumentSnapshot written with ID: " + documentReference.getId());
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("FAIL", "Error adding document", e);
-                                }
-                            });
-                    Intent x = new Intent(doCommentActivity.this, CommandActivity.class);
-                    startActivity(x);
-                    finish();
-                }else{
-                    showMessage("Lütfen tüm alanları doldurunuz");
-                }
-
-
-
-
+        commentButton.setOnClickListener(view -> {
+            if(!commentTitle.getText().toString().equals("") && !commentContent.getText().toString().equals("")){
+                Date currentDate = new Date();
+                String contentToPush = commentContent.getText().toString().replaceAll("\\s{2,}", " ").replaceAll("[\\n\\r]"," ");
+                Comment comment = new Comment(loggedUser.getName(),loggedUser.getSurname(), commentTitle.getText().toString(), contentToPush, fbaseAuth.getUid(), currentDate);
+                databaseFirestore.collection("comments")
+                        .add(comment)
+                        .addOnSuccessListener(documentReference -> Log.d("SUCCESS", "DocumentSnapshot written with ID: " + documentReference.getId()))
+                        .addOnFailureListener(e -> Log.w("FAIL", "Error adding document", e));
+                Intent x = new Intent(doCommentActivity.this, CommandActivity.class);
+                startActivity(x);
+                finish();
+            }else{
+                showMessage("Lütfen tüm alanları doldurunuz");
             }
+
+
+
+
         });
     }
 

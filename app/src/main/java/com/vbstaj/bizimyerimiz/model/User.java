@@ -15,10 +15,12 @@ public class User {
     private String linkedinUsername;
     private String phoneNumber;
 
-    public User(String name, String surname, Date birthdate, Date registeredAt, Boolean gender, String city, String email, String linkedinUsername, String phoneNumber) {
+    public User(){};
+
+    public User(String name, String surname, Date birthdate, Date registeredAt, Boolean gender, String city, String email, String linkedinUsername, String phoneNumber,Boolean isAdmin) {
         this.name = name;
         this.surname = surname;
-        this.isAdmin = false;
+        this.isAdmin = isAdmin;
         this.birthdate = birthdate;
         this.registeredAt = registeredAt;
         this.gender = gender;
@@ -70,5 +72,43 @@ public class User {
         return phoneNumber;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setRegisteredAt(Date registeredAt) {
+        this.registeredAt = registeredAt;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setLinkedinUsername(String linkedinUsername) {
+        this.linkedinUsername = linkedinUsername;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

@@ -37,7 +37,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_shape_homebutton"
             android:elevation="10dp"
-            android:text="@string/Geri"
+            android:text="@string/geri"
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

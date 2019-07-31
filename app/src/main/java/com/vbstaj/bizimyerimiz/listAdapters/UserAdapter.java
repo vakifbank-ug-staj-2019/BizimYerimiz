@@ -53,7 +53,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
         }
 
         Date fullDate = mylist.getBirthdate();
-        SimpleDateFormat onlyDate = new SimpleDateFormat("dd.MM.YYYY");
+        SimpleDateFormat onlyDate = new SimpleDateFormat("dd/MM/YYYY");
         holder.birthdate.setText(onlyDate.format(fullDate));
 
         // AGE
@@ -70,12 +70,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
         holder.registerdate.setText(onlyDate.format(mylist.getRegisteredAt()));
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.sectionsToHide.setVisibility(View.VISIBLE);
-                listener.ItemClick(list.get(position),position);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            holder.sectionsToHide.setVisibility(View.VISIBLE);
+            listener.ItemClick(list.get(position),position);
         });
     }
 

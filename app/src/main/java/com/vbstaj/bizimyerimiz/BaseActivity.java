@@ -49,23 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public User getUser(String id){
-        DocumentReference docRef = databaseFirestore.collection("users").document(id);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> userDoc) {
-                if (userDoc.isSuccessful()) {
-                    DocumentSnapshot document = userDoc.getResult();
-                    if (document.exists()) {
-                        loggedUser = document.toObject(User.class);
-                    } else {
-                        Log.d("asd", "No such document");
-                    }
-                } else {
-                    Log.d("asd", "get failed with ", userDoc.getException());
-                }
-            }
-        });
-        return  loggedUser;
+       return loggedUser;
     };
 
 
