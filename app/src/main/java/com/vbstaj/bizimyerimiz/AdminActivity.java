@@ -34,7 +34,7 @@ public class AdminActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        geri = (Button) findViewById(R.id.Geri);
         recycle = (RecyclerView) findViewById(R.id.listViewAdmin);
         list = new ArrayList<User>();
 
@@ -66,11 +66,13 @@ public class AdminActivity extends BaseActivity {
                     }
                 });
 
-
-
-
-
-
+        geri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent u = new Intent(AdminActivity.this, CommandActivity.class);
+                startActivity(u);
+            }
+        });
 
 
 
