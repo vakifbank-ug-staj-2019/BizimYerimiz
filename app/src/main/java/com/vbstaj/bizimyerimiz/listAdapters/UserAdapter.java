@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -16,6 +15,7 @@ import com.vbstaj.bizimyerimiz.model.User;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
 
@@ -51,8 +51,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
         SimpleDateFormat onlyDate = new SimpleDateFormat("dd/MM/YYYY");
         holder.birthdate.setText(onlyDate.format(fullDate));
 
-        // AGE
-        holder.age.setText("(22)");
+        holder.age.setText("(" + getAge(fullDate) + ")");
 
         holder.city.setText(mylist.getCity());
 
@@ -73,6 +72,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public long getAge(Date birthdate){
+        Date currentDate = new Date();
+        long difference = Math.abs(currentDate.getTime() - birthdate.getTime());
+        return TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS) / 365;
     }
 
 
