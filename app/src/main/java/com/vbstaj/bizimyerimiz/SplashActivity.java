@@ -6,26 +6,26 @@ import androidx.appcompat.widget.AppCompatImageView;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+    public int getContentView() {
+        return R.layout.activity_splash;
+    }
 
-        Thread timerThread = new Thread(){
-            public void run(){
-                try{
-                    sleep(2500);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }finally{
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+
+    @Override
+    public void initView() {
+
+        if(fbaseAuth.getCurrentUser() != null){
+            getLoginUser(fbaseAuth.getCurrentUser().getUid());
+        }
+        new android.os.Handler().postDelayed(
+                () -> {
+                    Intent intent = new Intent(SplashActivity.this, CommandActivity.class);
                     startActivity(intent);
-                }
-            }
-        };
-        timerThread.start();
+                },
+                2000);
     }
 
     @Override
