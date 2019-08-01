@@ -87,7 +87,7 @@ public class createaccountActivity extends BaseActivity {
                                             e.printStackTrace();
                                         }
                                         String registeredID = task.getResult().getUser().getUid();
-                                        User registeredUser = new User(regName.getText().toString(), regSurname.getText().toString(), bDate, currentDate, true, regCity.getText().toString(), regEmail.getText().toString(), regLinkedin.getText().toString(), regPhone.getText().toString(),false);
+                                        User registeredUser = new User(regName.getText().toString(), regSurname.getText().toString(), bDate, currentDate, regCity.getText().toString(), regEmail.getText().toString(), regLinkedin.getText().toString(), regPhone.getText().toString(),false);
 
                                         databaseFirestore.collection("users").document(registeredID)
                                                 .set(registeredUser)

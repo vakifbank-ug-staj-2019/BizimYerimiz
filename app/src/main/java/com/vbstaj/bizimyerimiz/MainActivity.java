@@ -29,10 +29,6 @@ public class MainActivity extends BaseActivity {
     private Button register;
     private Button resetPassword;
 
-
-    private FirebaseAuth fbaseAuth;
-    private FirebaseUser fbaseUser;
-
     @Override
     public int getContentView() {
         return R.layout.activity_main;
@@ -52,10 +48,8 @@ public class MainActivity extends BaseActivity {
         fbaseAuth = FirebaseAuth.getInstance();
         fbaseUser = fbaseAuth.getCurrentUser();
 
-        if (fbaseUser != null) { // check user session
-            getLoginUser(fbaseAuth.getUid());
-        }
         displayData();
+
         /**Giriş Yap butonunu çalıştırır.*/
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,12 +97,8 @@ public class MainActivity extends BaseActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             saveinfo();
-                            getLoginUser(task.getResult().getUser().getUid());
-
-                            Intent i = new Intent(MainActivity.this, CommandActivity.class);
-                            startActivity(i);
+                            startActivity(new Intent(MainActivity.this,SplashActivity.class));
                             finish();
-
                         } else {
                             Toast.makeText(getApplicationContext(), "Lütfen ilgili alanları doğru doldurunuz", Toast.LENGTH_LONG).show();
                         }
@@ -136,32 +126,6 @@ public class MainActivity extends BaseActivity {
         emailField.setText(email);
         passwordField.setText(pv);
     }
-
-
-    public void getLoginUser(String id) {
-        DocumentReference docRef = databaseFirestore.collection("users").document(id);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> userDoc) {
-                if (userDoc.isSuccessful()) {
-                    DocumentSnapshot document = userDoc.getResult();
-                    if (document.exists()) {
-                        loggedUser = document.toObject(User.class);
-                        Intent i = new Intent(MainActivity.this, CommandActivity.class);
-                        startActivity(i);
-                        finish();
-                    } else {
-                        Log.d("asd", "No such document");
-                    }
-                } else {
-                    Log.d("asd", "get failed with ", userDoc.getException());
-                }
-            }
-        });
-
-    }
-
-    ;
 }
 
 

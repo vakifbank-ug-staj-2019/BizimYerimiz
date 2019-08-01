@@ -46,18 +46,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
     public void onBindViewHolder(final MyHoder holder, final int position) {
         User mylist = list.get(position);
         holder.name.setText(mylist.getName() + " " + mylist.getSurname());
-        if(mylist.isGender() == true){
-            holder.femaleIcon.setVisibility(View.GONE);
-        }else{
-            holder.maleIcon.setVisibility(View.GONE);
-        }
 
         Date fullDate = mylist.getBirthdate();
         SimpleDateFormat onlyDate = new SimpleDateFormat("dd/MM/YYYY");
         holder.birthdate.setText(onlyDate.format(fullDate));
 
         // AGE
-        holder.age.setText("22");
+        holder.age.setText("(22)");
 
         holder.city.setText(mylist.getCity());
 
@@ -69,10 +64,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
 
         holder.registerdate.setText(onlyDate.format(mylist.getRegisteredAt()));
 
-
         holder.itemView.setOnClickListener(view -> {
             holder.sectionsToHide.setVisibility(View.VISIBLE);
-            listener.ItemClick(list.get(position),position);
+            listener.ItemClick(mylist,position);
         });
     }
 
@@ -85,17 +79,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
     class MyHoder extends RecyclerView.ViewHolder{
         ConstraintLayout sectionsToHide;
         TextView name,birthdate,age,city,mail,phone,linkedin,registerdate;
-        ImageView femaleIcon,maleIcon;
 
 
         public MyHoder(View itemView) {
             super(itemView);
 
             sectionsToHide = (ConstraintLayout) itemView.findViewById(R.id.allSections);
-
-            maleIcon = (ImageView)itemView.findViewById(R.id.maleIcon);
-            femaleIcon = (ImageView)itemView.findViewById(R.id.femaleIcon);
-
             name = (TextView)itemView.findViewById(R.id.nameSurname);
             birthdate = (TextView)itemView.findViewById(R.id.birthDate);
             age = (TextView)itemView.findViewById(R.id.birthdayAge);

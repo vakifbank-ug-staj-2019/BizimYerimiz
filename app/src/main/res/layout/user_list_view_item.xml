@@ -22,24 +22,6 @@
             app:layout_constraintLeft_toLeftOf="@id/nameSection"
             android:id="@+id/nameSurname"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_male_black_48"
-            app:layout_constraintLeft_toRightOf="@id/nameSurname"
-            app:layout_constraintTop_toTopOf="@+id/nameSection"
-            android:id="@+id/maleIcon"
-            android:layout_marginStart="5dp"/>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_female_black_48dp"
-            app:layout_constraintLeft_toRightOf="@id/nameSurname"
-            app:layout_constraintTop_toTopOf="@+id/nameSection"
-            android:id="@+id/femaleIcon"
-            android:layout_marginStart="5dp"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

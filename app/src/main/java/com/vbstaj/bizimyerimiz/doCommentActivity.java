@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.vbstaj.bizimyerimiz.model.Comment;
+import com.vbstaj.bizimyerimiz.utils.Utils;
 
 import java.util.Date;
 
@@ -30,7 +31,7 @@ public class doCommentActivity extends BaseActivity {
     @Override
     public void initView() {
 
-        loggedUser =  getUser(fbaseAuth.getCurrentUser().getUid());
+        getLoginUser(fbaseAuth.getCurrentUser().getUid());
         commentButton = (Button)findViewById(R.id.commentButton);
         commentTitle = (EditText)findViewById(R.id.commentTitle);
         commentContent = (EditText)findViewById(R.id.commentContent);
@@ -39,7 +40,7 @@ public class doCommentActivity extends BaseActivity {
             if(!commentTitle.getText().toString().equals("") && !commentContent.getText().toString().equals("")){
                 Date currentDate = new Date();
                 String contentToPush = commentContent.getText().toString().replaceAll("\\s{2,}", " ").replaceAll("[\\n\\r]"," ");
-                Comment comment = new Comment(loggedUser.getName(),loggedUser.getSurname(), commentTitle.getText().toString(), contentToPush, fbaseAuth.getUid(), currentDate);
+                Comment comment = new Comment(Utils.loggedUser.getName(),Utils.loggedUser.getSurname(), commentTitle.getText().toString(), contentToPush, fbaseAuth.getUid(), currentDate);
                 databaseFirestore.collection("comments")
                         .add(comment)
                         .addOnSuccessListener(documentReference -> Log.d("SUCCESS", "DocumentSnapshot written with ID: " + documentReference.getId()))

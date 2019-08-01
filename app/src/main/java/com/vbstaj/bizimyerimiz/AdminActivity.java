@@ -1,16 +1,13 @@
 package com.vbstaj.bizimyerimiz;
 
 
-import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.vbstaj.bizimyerimiz.listAdapters.UserAdapter;
 import com.vbstaj.bizimyerimiz.model.User;
@@ -46,7 +43,7 @@ public class AdminActivity extends BaseActivity {
 
         recyclerAdapter.setOnItemClickListener((user, pos) -> {
             if(lastPos != -1 && lastPos != pos){
-                recyclerAdapter.notifyItemChanged(lastPos);
+                recyclerAdapter.notifyItemChanged(pos);
             }
 
             lastPos = pos;
@@ -58,7 +55,9 @@ public class AdminActivity extends BaseActivity {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             User tmp_user = document.toObject(User.class);
-                            list.add(tmp_user);
+                            if(!tmp_user.isAdmin()){
+                                list.add(tmp_user);
+                            }
                         }
                         recycle.setAdapter(recyclerAdapter);
                     } else {
