@@ -40,6 +40,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
         return myHoder;
     }
 
+
     @Override
     public void onBindViewHolder(final MyHoder holder, final int position) {
         Comment mylist = list.get(position);
@@ -55,12 +56,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
         holder.date.setText(simpleDateFormat.format(tmpDate));
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.content.setText(list.get(position).getContent());
-                listener.ItemClick(list.get(position),position);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            holder.content.setText(list.get(position).getContent());
+            listener.ItemClick(mylist,position);
         });
     }
 
