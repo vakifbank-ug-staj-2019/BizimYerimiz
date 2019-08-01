@@ -4,21 +4,16 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.vbstaj.bizimyerimiz.listAdapters.CommentAdapter;
 import com.vbstaj.bizimyerimiz.model.Comment;
+import com.vbstaj.bizimyerimiz.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +56,7 @@ public class CommandActivity extends BaseActivity {
         recycle.setItemAnimator( new DefaultItemAnimator());
         recycle.setAdapter(recyclerAdapter);
 
-        if(loggedUser.isAdmin()){
+        if(Utils.loggedUser.isAdmin()){
             commentbutton.setVisibility(View.GONE);
             userListButton.setVisibility(View.VISIBLE);
         }else{
@@ -100,6 +95,7 @@ public class CommandActivity extends BaseActivity {
 
        out.setOnClickListener(view -> {
            fbaseAuth.signOut();
+           Utils.loggedUser = null;
            Intent i = new Intent(CommandActivity.this, MainActivity.class);
            startActivity(i);
            finish();
