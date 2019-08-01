@@ -1,7 +1,9 @@
 package com.vbstaj.bizimyerimiz;
 
 
+import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -70,6 +72,7 @@ public class AdminActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent u = new Intent(AdminActivity.this, CommandActivity.class);
                 startActivity(u);
+                finish();
             }
         });
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -16,14 +15,15 @@ import com.vbstaj.bizimyerimiz.model.User;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder> {
 
     private List<User> list;
     private Context context;
     private OnItemClickListener listener;
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -35,7 +35,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
     @Override
     public MyHoder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.user_list_view_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.user_list_view_item, parent, false);
         MyHoder myHoder = new MyHoder(view);
 
 
@@ -50,9 +50,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
         Date fullDate = mylist.getBirthdate();
         SimpleDateFormat onlyDate = new SimpleDateFormat("dd/MM/YYYY");
         holder.birthdate.setText(onlyDate.format(fullDate));
+        if (holder.sectionsToHide.getVisibility() == View.VISIBLE)
+            holder.sectionsToHide.setVisibility(View.GONE);
+        else
+            holder.sectionsToHide.setVisibility(View.VISIBLE);
 
-        // AGE
-        holder.age.setText("(22)");
+
+        holder.age.setText("(" + getAge(fullDate) + ")");
 
         holder.city.setText(mylist.getCity());
 
@@ -65,8 +69,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
         holder.registerdate.setText(onlyDate.format(mylist.getRegisteredAt()));
 
         holder.itemView.setOnClickListener(view -> {
-            holder.sectionsToHide.setVisibility(View.VISIBLE);
-            listener.ItemClick(mylist,position);
+            if (holder.sectionsToHide.getVisibility() == View.VISIBLE)
+                holder.sectionsToHide.setVisibility(View.GONE);
+            else
+                holder.sectionsToHide.setVisibility(View.VISIBLE);
+            listener.ItemClick(mylist, position);
         });
     }
 
@@ -75,24 +82,30 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder>{
         return list.size();
     }
 
+    public long getAge(Date birthdate) {
+        Date currentDate = new Date();
+        long difference = Math.abs(currentDate.getTime() - birthdate.getTime());
+        return TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS) / 365;
+    }
 
-    class MyHoder extends RecyclerView.ViewHolder{
+
+    class MyHoder extends RecyclerView.ViewHolder {
         ConstraintLayout sectionsToHide;
-        TextView name,birthdate,age,city,mail,phone,linkedin,registerdate;
+        TextView name, birthdate, age, city, mail, phone, linkedin, registerdate;
 
 
         public MyHoder(View itemView) {
             super(itemView);
 
             sectionsToHide = (ConstraintLayout) itemView.findViewById(R.id.allSections);
-            name = (TextView)itemView.findViewById(R.id.nameSurname);
-            birthdate = (TextView)itemView.findViewById(R.id.birthDate);
-            age = (TextView)itemView.findViewById(R.id.birthdayAge);
-            city = (TextView)itemView.findViewById(R.id.locationContent);
-            mail = (TextView)itemView.findViewById(R.id.emailContent);
-            phone = (TextView)itemView.findViewById(R.id.numberContent);
-            linkedin = (TextView)itemView.findViewById(R.id.linkedinContent);
-            registerdate = (TextView)itemView.findViewById(R.id.registerDateContent);
+            name = (TextView) itemView.findViewById(R.id.nameSurname);
+            birthdate = (TextView) itemView.findViewById(R.id.birthDate);
+            age = (TextView) itemView.findViewById(R.id.birthdayAge);
+            city = (TextView) itemView.findViewById(R.id.locationContent);
+            mail = (TextView) itemView.findViewById(R.id.emailContent);
+            phone = (TextView) itemView.findViewById(R.id.numberContent);
+            linkedin = (TextView) itemView.findViewById(R.id.linkedinContent);
+            registerdate = (TextView) itemView.findViewById(R.id.registerDateContent);
 
 
         }

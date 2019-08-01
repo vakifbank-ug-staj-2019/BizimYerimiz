@@ -66,7 +66,7 @@ public class CommandActivity extends BaseActivity {
 
         userListButton.setOnClickListener(view -> {
             startActivity(new Intent(CommandActivity.this, AdminActivity.class));
-            finish();
+
         });
 
        refresh.setOnClickListener(view -> {
