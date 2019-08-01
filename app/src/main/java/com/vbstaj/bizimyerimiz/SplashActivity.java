@@ -1,10 +1,6 @@
 package com.vbstaj.bizimyerimiz;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
-
 import android.content.Intent;
-import android.os.Bundle;
 
 public class SplashActivity extends BaseActivity {
 
@@ -25,7 +21,7 @@ public class SplashActivity extends BaseActivity {
                     Intent intent = new Intent(SplashActivity.this, CommandActivity.class);
                     startActivity(intent);
                 },
-                2000);
+                3000);
     }
 
     @Override
