@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="@id/nameSection"
             app:layout_constraintLeft_toLeftOf="@id/nameSection"
             android:id="@+id/nameSurname"/>
-        
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

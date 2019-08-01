@@ -44,7 +44,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
     public void onBindViewHolder(final MyHoder holder, final int position) {
         Comment mylist = list.get(position);
         holder.name.setText(mylist.getName());
-        holder.content.setText(mylist.getContent());
+        //holder.content.setText(mylist.getContent());
 
         holder.content.setText(mylist.getContent().length() > 60 ? mylist.getContent().substring(0,60) + "..." : mylist.getContent());
 
@@ -53,7 +53,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
         Date tmpDate = mylist.getCreatedAt();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd.MM.YYYY");
         holder.date.setText(simpleDateFormat.format(tmpDate));
-
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
