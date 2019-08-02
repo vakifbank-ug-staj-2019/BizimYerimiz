@@ -2,6 +2,7 @@ package com.vbstaj.bizimyerimiz.listAdapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,6 +95,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder> {
             linkedinIntent.setData(Uri.parse("https://www.linkedin.com/in/" + mylist.getLinkedinUsername()));
             context.startActivity(linkedinIntent);
         });
+
+        if(mylist.isAdmin()){
+            Drawable image = context.getResources().getDrawable( R.drawable.ic_admin_32 );
+            int h = image.getIntrinsicHeight();
+            int w = image.getIntrinsicWidth();
+            image.setBounds( 0, 0, w, h );
+            holder.name.setCompoundDrawables( null, null, image, null );
+        }
 
 
     }
