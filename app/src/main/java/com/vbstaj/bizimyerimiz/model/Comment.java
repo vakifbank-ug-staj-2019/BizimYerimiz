@@ -2,7 +2,7 @@ package com.vbstaj.bizimyerimiz.model;
 
 import java.util.Date;
 
-public class Comment {
+public class Comment implements Comparable<Comment> {
     private String name;
     private String content;
     private String userID;
@@ -19,6 +19,10 @@ public class Comment {
 
     public Comment(){}
 
+    @Override
+    public int compareTo(Comment comment) {
+        return comment.getCreatedAt().compareTo(getCreatedAt());
+    }
 
     public String getTitle() { return title; }
 

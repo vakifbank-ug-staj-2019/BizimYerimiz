@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.vbstaj.bizimyerimiz.listAdapters.CommentAdapter;
 import com.vbstaj.bizimyerimiz.model.Comment;
 import com.vbstaj.bizimyerimiz.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -42,7 +42,6 @@ public class CommandActivity extends BaseActivity {
 
 
         userListButton = (Button)findViewById(R.id.userListButton);
-        refresh = (Button)findViewById(R.id.refreshButton);
         out= (Button) findViewById (R.id.out);
         commentbutton=(Button)findViewById(R.id.commandButton);
 
@@ -69,22 +68,6 @@ public class CommandActivity extends BaseActivity {
 
         });
 
-       refresh.setOnClickListener(view -> {
-           list.clear();
-           databaseFirestore.collection("comments").orderBy("createdAt", Query.Direction.DESCENDING)
-                   .get()
-                   .addOnCompleteListener(task -> {
-                       if (task.isSuccessful()) {
-                           for (QueryDocumentSnapshot document : task.getResult()) {
-                               Comment tmp_comment = document.toObject(Comment.class);
-                               list.add(tmp_comment);
-                           }
-                           recycle.setAdapter(recyclerAdapter);
-                       } else {
-                           Log.d("error", "Error getting documents: ", task.getException());
-                       }
-                   });
-       });
        recyclerAdapter.setOnItemClickListener((comment, pos) -> {
            if(lastPos != -1 && lastPos != pos){
                recyclerAdapter.notifyItemChanged(lastPos);
@@ -108,19 +91,24 @@ public class CommandActivity extends BaseActivity {
 
         });
 
-        databaseFirestore.collection("comments").orderBy("createdAt", Query.Direction.DESCENDING)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Comment tmp_comment = document.toObject(Comment.class);
+        databaseFirestore.collection("comments")
+                .addSnapshotListener((value, e) -> {
+                    if (e != null) {
+                        Log.w("ERROR", "Listen failed.", e);
+                        return;
+                    }
+
+                    for (QueryDocumentSnapshot doc : value) {
+                        if (doc != null) {
+                            Comment tmp_comment = doc.toObject(Comment.class);
                             list.add(tmp_comment);
                         }
-                        recycle.setAdapter(recyclerAdapter);
-                    } else {
-                        Log.d("error", "Error getting documents: ", task.getException());
                     }
+                    Collections.sort(list);
+                    recycle.setAdapter(recyclerAdapter);
                 });
+
+
 
     }
 }
