@@ -42,7 +42,7 @@ public class AdminActivity extends BaseActivity {
 
         recyclerAdapter.setOnItemClickListener((user, pos) -> {
             if(lastPos != -1 && lastPos != pos){
-                recyclerAdapter.notifyItemChanged(pos);
+                recyclerAdapter.notifyItemChanged(lastPos);
             }
 
             lastPos = pos;

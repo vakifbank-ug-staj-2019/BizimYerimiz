@@ -52,13 +52,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder> {
         User mylist = list.get(position);
         holder.name.setText(mylist.getName() + " " + mylist.getSurname());
 
+        if (holder.sectionsToHide.getVisibility() == View.VISIBLE)
+            holder.sectionsToHide.setVisibility(View.GONE);
+
         Date fullDate = mylist.getBirthdate();
         SimpleDateFormat onlyDate = new SimpleDateFormat("dd/MM/YYYY");
         holder.birthdate.setText(onlyDate.format(fullDate));
-        if (holder.sectionsToHide.getVisibility() == View.VISIBLE)
-            holder.sectionsToHide.setVisibility(View.GONE);
-        else
-            holder.sectionsToHide.setVisibility(View.VISIBLE);
 
         holder.age.setText("(" + getAge(fullDate) + ")");
 
