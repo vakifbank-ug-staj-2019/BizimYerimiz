@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,10 +15,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.vbstaj.bizimyerimiz.model.User;
 
 public class MainActivity extends BaseActivity {
 
@@ -70,7 +65,7 @@ public class MainActivity extends BaseActivity {
 
 
         resetPassword.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, ForgotPassword.class));
+            startActivity(new Intent(MainActivity.this, ForgotPasswordActivity.class));
             finish();
         });
 
@@ -78,7 +73,7 @@ public class MainActivity extends BaseActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent u = new Intent(MainActivity.this, createaccountActivity.class);
+                Intent u = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(u);
             }
         });
@@ -89,8 +84,6 @@ public class MainActivity extends BaseActivity {
      * Giriş yap butonuna tıklandıktan sonra eğer userEmail ve userPassword boş değilse bu fonksiyon çalışacak
      */
     public void loginFunc(String userName, String userPassword) {
-
-        Log.d("variables", userName + ">>>" + userPassword);
         fbaseAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(this,
                 new OnCompleteListener<AuthResult>() {
                     @Override

@@ -18,7 +18,7 @@ public class SplashActivity extends BaseActivity {
         }
         new android.os.Handler().postDelayed(
                 () -> {
-                    Intent intent = new Intent(SplashActivity.this, CommandActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, CommentActivity.class);
                     startActivity(intent);
                 },
                 3000);
