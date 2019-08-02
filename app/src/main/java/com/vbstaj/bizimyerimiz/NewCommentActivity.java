@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.vbstaj.bizimyerimiz.model.Comment;
 import com.vbstaj.bizimyerimiz.utils.Utils;
@@ -21,6 +22,13 @@ public class NewCommentActivity extends BaseActivity {
         return R.layout.activity_new_comment;
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        Intent x = new Intent(NewCommentActivity.this, CommentActivity.class);
+        startActivity(x);
+        finish();
+    }
 
     @Override
     public void initView() {

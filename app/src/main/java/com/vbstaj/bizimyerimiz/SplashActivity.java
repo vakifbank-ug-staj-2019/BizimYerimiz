@@ -21,7 +21,7 @@ public class SplashActivity extends BaseActivity {
                     Intent intent = new Intent(SplashActivity.this, CommentActivity.class);
                     startActivity(intent);
                 },
-                3000);
+                2500);
     }
 
     @Override
