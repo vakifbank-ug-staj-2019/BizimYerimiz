@@ -104,6 +104,7 @@ public class CommentActivity extends BaseActivity {
 
             Intent y = new Intent(CommentActivity.this, NewCommentActivity.class);
             startActivity(y);
+            finish();
 
         });
 
