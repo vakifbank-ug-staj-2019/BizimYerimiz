@@ -24,7 +24,7 @@
     <string name="geri">Geri</string>
     <string name="date">Doğum Tarihi (GG/AA/YYYY)</string>
     <string name="country">Yaşadığınız İl</string>
-    <string name="phoneNumber">Telefon Numarası</string>
+    <string name="phoneNumber">Telefon Numarası (05XXXXXXXXX)</string>
     <string name="linkedIn">Linkedin Kullanıcı Adı</string>
     <string name="userList">Kullanıcılar</string>
 

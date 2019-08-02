@@ -61,6 +61,8 @@ public class RegisterActivity extends BaseActivity {
                     showMessage("Lütfen geçerli e-posta giriniz.");
                 }else if(!regBDate.getText().toString().matches("^([0-2][0-9]|(3)[0-1])(\\/)(((0)[0-9])|((1)[0-2]))(\\/)\\d{4}$")){
                     showMessage("Doğum tarihi formatı GG/AA/YYYY şeklinde olmalıdır");
+                }else if(!regPhone.getText().toString().matches("^05[0-9]{9}$")){
+                    showMessage("Telefon 05XXXXXXXXX formatında olmalıdır");
                 }else if(regPassword.getText().toString().equals("") || regRePassword.getText().toString().equals("")){
                     showMessage("Şifre alanları boş bırakılamaz.");
                 }else if(!regPassword.getText().toString().equals(regRePassword.getText().toString())){
