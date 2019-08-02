@@ -1,10 +1,14 @@
 package com.vbstaj.bizimyerimiz.listAdapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,16 +59,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder> {
         else
             holder.sectionsToHide.setVisibility(View.VISIBLE);
 
-
         holder.age.setText("(" + getAge(fullDate) + ")");
 
         holder.city.setText(mylist.getCity());
-
-        holder.mail.setText(mylist.getEmail());
-
-        holder.phone.setText(mylist.getPhoneNumber());
-
-        holder.linkedin.setText(mylist.getLinkedinUsername());
 
         holder.registerdate.setText(onlyDate.format(mylist.getRegisteredAt()));
 
@@ -75,6 +72,30 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder> {
                 holder.sectionsToHide.setVisibility(View.VISIBLE);
             listener.ItemClick(mylist, position);
         });
+
+        holder.mailButton.setOnClickListener(view -> {
+            Intent mailIntent = new Intent(Intent.ACTION_SEND);
+            mailIntent.setType("message/rfc822");
+            mailIntent.putExtra(Intent.EXTRA_EMAIL  , new String[]{mylist.getEmail()});
+            try {
+                context.startActivity(Intent.createChooser(mailIntent, "Mail yolla"));
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(view.getContext(), "Hiçbir mail uygulaması yüklü değil", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.phoneCallButton.setOnClickListener(view -> {
+            Intent phonecallIntent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", mylist.getPhoneNumber(), null));
+            context.startActivity(phonecallIntent);
+        });
+
+        holder.linkedinButton.setOnClickListener(view -> {
+            Intent linkedinIntent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://almondmendoza.com/android-applications/"));
+            linkedinIntent.setData(Uri.parse("https://www.linkedin.com/in/" + mylist.getLinkedinUsername()));
+            context.startActivity(linkedinIntent);
+        });
+
+
     }
 
     @Override
@@ -91,7 +112,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder> {
 
     class MyHoder extends RecyclerView.ViewHolder {
         ConstraintLayout sectionsToHide;
-        TextView name, birthdate, age, city, mail, phone, linkedin, registerdate;
+        TextView name, birthdate, age, city,registerdate;
+        Button linkedinButton,phoneCallButton,mailButton;
 
 
         public MyHoder(View itemView) {
@@ -102,10 +124,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder> {
             birthdate = (TextView) itemView.findViewById(R.id.birthDate);
             age = (TextView) itemView.findViewById(R.id.birthdayAge);
             city = (TextView) itemView.findViewById(R.id.locationContent);
-            mail = (TextView) itemView.findViewById(R.id.emailContent);
-            phone = (TextView) itemView.findViewById(R.id.numberContent);
-            linkedin = (TextView) itemView.findViewById(R.id.linkedinContent);
             registerdate = (TextView) itemView.findViewById(R.id.registerDateContent);
+
+            linkedinButton = (Button)itemView.findViewById(R.id.linkedinButton);
+            phoneCallButton = (Button)itemView.findViewById(R.id.phoneCallButton);
+            mailButton = (Button)itemView.findViewById(R.id.mailButton);
 
 
         }
