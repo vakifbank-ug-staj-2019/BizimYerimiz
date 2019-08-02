@@ -5,207 +5,138 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_margin="5dp"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/nameSection"
-        android:padding="5dp">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:layout_margin="5dp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="@id/nameSection"
-            app:layout_constraintLeft_toLeftOf="@id/nameSection"
-            android:id="@+id/nameSurname"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/nameSurname"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/nameSection"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/nameSurname"
         android:id="@+id/allSections">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/birthdaySection"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_cake_black_24dp"
+            android:drawablePadding="10dp"
+            android:layout_marginStart="5dp"
             app:layout_constraintTop_toTopOf="@id/allSections"
-            android:padding="5dp">
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/birthDate"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_cake_black_24dp"
-                app:layout_constraintLeft_toLeftOf="@id/birthdaySection"
-                app:layout_constraintTop_toTopOf="@+id/birthdaySection"
-                android:id="@+id/birthdayIcon"
-                android:layout_margin="3dp"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:layout_marginStart="5dp"
-                app:layout_constraintTop_toTopOf="@id/birthdaySection"
-                app:layout_constraintLeft_toRightOf="@id/birthdayIcon"
-                android:id="@+id/birthDate"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:layout_marginStart="5dp"
-                app:layout_constraintTop_toTopOf="@id/birthdaySection"
-                app:layout_constraintLeft_toRightOf="@id/birthDate"
-                android:id="@+id/birthdayAge"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/locationSection"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:padding="2.5dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/birthdaySection"
-            android:padding="5dp">
+            android:textSize="14sp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            app:layout_constraintTop_toTopOf="@id/allSections"
+            app:layout_constraintLeft_toRightOf="@id/birthDate"
+            android:id="@+id/birthdayAge"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_location_city_black_24dp"
-                app:layout_constraintLeft_toLeftOf="@id/locationSection"
-                app:layout_constraintTop_toTopOf="@+id/locationSection"
-                android:id="@+id/locationIcon"
-                android:layout_margin="3dp"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:layout_marginStart="5dp"
-                app:layout_constraintTop_toTopOf="@id/locationSection"
-                app:layout_constraintLeft_toRightOf="@id/locationIcon"
-                android:id="@+id/locationContent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/registerDateSection"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/locationSection"
-            tools:layout_editor_absoluteX="0dp">
+            android:drawableStart="@drawable/ic_location_city_black_24dp"
+            android:drawablePadding="10dp"
+            android:textSize="14sp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintTop_toBottomOf="@id/birthDate"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/locationContent"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/registerDateIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="32dp"
-                app:layout_constraintLeft_toLeftOf="@id/registerDateSection"
-                app:layout_constraintTop_toTopOf="@+id/registerDateSection"
-                app:srcCompat="@drawable/ic_date_range_black_24dp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/registerDateContent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:textSize="22sp"
-                app:layout_constraintLeft_toRightOf="@id/registerDateIcon"
-                app:layout_constraintTop_toTopOf="@id/registerDateSection" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/mailSection"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center_vertical"
+            android:id="@+id/registerDateContent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/registerDateSection"
-            android:padding="5dp">
+            android:drawableStart="@drawable/ic_date_range_black_24dp"
+            android:drawablePadding="10dp"
+            android:layout_marginStart="5dp"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/locationContent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_email_black_24dp"
-                app:layout_constraintLeft_toLeftOf="@id/mailSection"
-                app:layout_constraintTop_toTopOf="@+id/mailSection"
-                android:id="@+id/mailIcon"
-                android:layout_margin="3dp"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:layout_marginStart="5dp"
-                app:layout_constraintTop_toTopOf="@id/mailSection"
-                app:layout_constraintLeft_toRightOf="@id/mailIcon"
-                android:id="@+id/emailContent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:clickable="true"
-            android:id="@+id/numberSection"
-            android:layout_width="match_parent"
+        <GridLayout
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:columnCount="3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/mailSection"
-            android:padding="5dp">
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/registerDateContent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <Button
+                android:background="@drawable/bg_shape"
+                android:id="@+id/linkedinButton"
+                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_local_phone_black_24dp"
-                app:layout_constraintLeft_toLeftOf="@id/numberSection"
-                app:layout_constraintTop_toTopOf="@+id/numberSection"
-                android:id="@+id/numberIcon"
-                android:layout_margin="3dp"/>
+                android:layout_height="32dp"
+                android:drawableStart="@drawable/ic_linkedin_black_24dp"
+                android:drawablePadding="5dp"
+                android:textSize="10sp"
+                android:padding="10dp"
+                android:textColor="@android:color/white"
+                android:text="linkedin"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/registerDateContent"
+                android:layout_margin="5dp"
+                />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <Button
+                android:id="@+id/phoneCallButton"
+                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:layout_marginStart="5dp"
-                app:layout_constraintTop_toTopOf="@id/numberSection"
-                app:layout_constraintLeft_toRightOf="@id/numberIcon"
-                android:id="@+id/numberContent"/>
+                android:layout_height="32dp"
+                android:drawableStart="@drawable/ic_local_phone_black_24dp"
+                android:drawablePadding="5dp"
+                android:textSize="10sp"
+                android:padding="10dp"
+                android:textColor="@android:color/white"
+                android:text="ara"
+                android:background="@drawable/bg_shape"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/registerDateContent"
+                android:layout_margin="5dp"
+                />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linkedinSection"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/numberSection"
-            android:padding="5dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/linkedinIcon"
+            <Button
+                android:id="@+id/mailButton"
+                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                app:layout_constraintLeft_toLeftOf="@id/linkedinSection"
-                app:layout_constraintTop_toTopOf="@+id/linkedinSection"
-                app:srcCompat="@drawable/ic_linkedin_black_24dp" />
+                android:layout_height="32dp"
+                android:drawableStart="@drawable/ic_email_black_24dp"
+                android:drawablePadding="5dp"
+                android:textSize="10sp"
+                android:padding="10dp"
+                android:textColor="@android:color/white"
+                android:text="MAIL"
+                android:background="@drawable/bg_shape"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/registerDateContent"
+                android:layout_margin="5dp"
+                />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:layout_marginStart="5dp"
-                app:layout_constraintTop_toTopOf="@id/linkedinSection"
-                app:layout_constraintLeft_toRightOf="@id/linkedinIcon"
-                android:id="@+id/linkedinContent"/>
+        </GridLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
