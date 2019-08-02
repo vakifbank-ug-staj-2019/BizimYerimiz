@@ -2,7 +2,7 @@ package com.vbstaj.bizimyerimiz.model;
 
 import java.util.Date;
 
-public class User {
+public class User implements Comparable<User> {
 
     private String name;
     private String surname;
@@ -28,7 +28,10 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-
+    @Override
+    public int compareTo(User user) {
+        return user.getRegisteredAt().compareTo(getRegisteredAt());
+    }
 
     public String getName() {
         return name;

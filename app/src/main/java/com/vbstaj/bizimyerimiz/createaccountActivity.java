@@ -60,6 +60,8 @@ public class createaccountActivity extends BaseActivity {
                     showMessage("Email boş bırakılamaz.");
                 }else if(!regEmail.getText().toString().matches("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$")){
                     showMessage("Lütfen geçerli e-posta giriniz.");
+                }else if(!regBDate.getText().toString().matches("^([0-2][0-9]|(3)[0-1])(\\/)(((0)[0-9])|((1)[0-2]))(\\/)\\d{4}$")){
+                    showMessage("Doğum tarihi formatı GG/AA/YYYY şeklinde olmalıdır");
                 }else if(regPassword.getText().toString().equals("") || regRePassword.getText().toString().equals("")){
                     showMessage("Şifre alanları boş bırakılamaz.");
                 }else if(!regPassword.getText().toString().equals(regRePassword.getText().toString())){

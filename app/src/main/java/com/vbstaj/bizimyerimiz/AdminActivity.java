@@ -15,6 +15,7 @@ import com.vbstaj.bizimyerimiz.listAdapters.UserAdapter;
 import com.vbstaj.bizimyerimiz.model.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AdminActivity extends BaseActivity {
@@ -51,20 +52,22 @@ public class AdminActivity extends BaseActivity {
             lastPos = pos;
         });
 
+
         databaseFirestore.collection("users")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            User tmp_user = document.toObject(User.class);
-                            if(!tmp_user.isAdmin()){
-                                list.add(tmp_user);
-                            }
-                        }
-                        recycle.setAdapter(recyclerAdapter);
-                    } else {
-                        Log.d("error", "Error getting documents: ", task.getException());
+                .addSnapshotListener((value, e) -> {
+                    if (e != null) {
+                        Log.w("ERROR", "Listen failed.", e);
+                        return;
                     }
+
+                    for (QueryDocumentSnapshot doc : value) {
+                        if (doc != null) {
+                            User tmp_comment = doc.toObject(User.class);
+                            list.add(tmp_comment);
+                        }
+                    }
+                    Collections.sort(list);
+                    recycle.setAdapter(recyclerAdapter);
                 });
 
         geri.setOnClickListener(new View.OnClickListener() {
