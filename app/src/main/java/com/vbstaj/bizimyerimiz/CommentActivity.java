@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class CommandActivity extends BaseActivity {
+public class CommentActivity extends BaseActivity {
 
     private Button refresh;
     private Button out;
@@ -35,7 +35,7 @@ public class CommandActivity extends BaseActivity {
 
     @Override
     public int getContentView() {
-        return R.layout.activity_command;
+        return R.layout.activity_comment;
     }
 
 
@@ -80,7 +80,7 @@ public class CommandActivity extends BaseActivity {
         }
 
         userListButton.setOnClickListener(view -> {
-            startActivity(new Intent(CommandActivity.this, AdminActivity.class));
+            startActivity(new Intent(CommentActivity.this, AdminActivity.class));
 
         });
 
@@ -95,14 +95,14 @@ public class CommandActivity extends BaseActivity {
        out.setOnClickListener(view -> {
            fbaseAuth.signOut();
            Utils.loggedUser = null;
-           Intent i = new Intent(CommandActivity.this, MainActivity.class);
+           Intent i = new Intent(CommentActivity.this, MainActivity.class);
            startActivity(i);
            finish();
        });
 
         commentbutton.setOnClickListener(view -> {
 
-            Intent y = new Intent(CommandActivity.this, doCommentActivity.class);
+            Intent y = new Intent(CommentActivity.this, NewCommentActivity.class);
             startActivity(y);
 
         });
@@ -113,7 +113,9 @@ public class CommandActivity extends BaseActivity {
                         Log.w("ERROR", "Listen failed.", e);
                         return;
                     }
-
+                    if(!list.isEmpty()){
+                        list.clear();
+                    }
                     for (QueryDocumentSnapshot doc : value) {
                         if (doc != null) {
                             Comment tmp_comment = doc.toObject(Comment.class);

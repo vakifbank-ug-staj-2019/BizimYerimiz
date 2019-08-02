@@ -1,10 +1,7 @@
 package com.vbstaj.bizimyerimiz;
 
 
-import android.content.Intent;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,7 +55,9 @@ public class AdminActivity extends BaseActivity {
                         Log.w("ERROR", "Listen failed.", e);
                         return;
                     }
-
+                    if(!list.isEmpty()){
+                        list.clear();
+                    }
                     for (QueryDocumentSnapshot doc : value) {
                         if (doc != null) {
                             User tmp_comment = doc.toObject(User.class);
