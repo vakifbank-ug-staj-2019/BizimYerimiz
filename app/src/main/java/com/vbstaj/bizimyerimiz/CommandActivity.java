@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,7 +28,8 @@ public class CommandActivity extends BaseActivity {
     private Button userListButton;
     private CommentAdapter recyclerAdapter;
     private int lastPos = -1;
-
+    private static final int TIME_INTERVAL = 2000; // 2basma arasındaki saniye en fazla 2 olablir.
+    private long mBackPressed;
     List<Comment> list;
     RecyclerView recycle;
 
@@ -37,6 +39,20 @@ public class CommandActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onBackPressed()
+    {
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
+        {
+
+            super.onBackPressed();
+            return;
+
+        }
+        else { Toast.makeText(getBaseContext(), "Uygulamadan çıkmak için bir daha basın", Toast.LENGTH_SHORT).show(); }
+
+        mBackPressed = System.currentTimeMillis();
+    }
     @Override
     public void initView() {
 
