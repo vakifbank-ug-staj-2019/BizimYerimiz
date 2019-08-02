@@ -2,21 +2,15 @@ package com.vbstaj.bizimyerimiz;
 
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.vbstaj.bizimyerimiz.model.Comment;
 import com.vbstaj.bizimyerimiz.utils.Utils;
 
 import java.util.Date;
 
-public class doCommentActivity extends BaseActivity {
+public class NewCommentActivity extends BaseActivity {
 
     private Button commentButton;
     private EditText commentTitle;
@@ -24,7 +18,7 @@ public class doCommentActivity extends BaseActivity {
 
     @Override
     public int getContentView() {
-        return R.layout.activity_do_comment;
+        return R.layout.activity_new_comment;
     }
 
 
@@ -45,7 +39,7 @@ public class doCommentActivity extends BaseActivity {
                         .add(comment)
                         .addOnSuccessListener(documentReference -> Log.d("SUCCESS", "DocumentSnapshot written with ID: " + documentReference.getId()))
                         .addOnFailureListener(e -> Log.w("FAIL", "Error adding document", e));
-                Intent x = new Intent(doCommentActivity.this, CommandActivity.class);
+                Intent x = new Intent(NewCommentActivity.this, CommentActivity.class);
                 startActivity(x);
                 finish();
             }else{

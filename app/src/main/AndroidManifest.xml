@@ -15,10 +15,10 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".AdminActivity"></activity>
-        <activity android:name=".createaccountActivity" />
-        <activity android:name=".doCommentActivity" />
-        <activity android:name=".CommandActivity" />
-        <activity android:name=".ForgotPassword" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".NewCommentActivity" />
+        <activity android:name=".CommentActivity" />
+        <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize">

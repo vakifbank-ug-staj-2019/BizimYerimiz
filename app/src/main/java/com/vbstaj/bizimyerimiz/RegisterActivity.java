@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -20,14 +19,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class createaccountActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity {
 
     private EditText regName,regSurname,regEmail,regPassword,regRePassword,regBDate,regCity,regPhone,regLinkedin;
     private Button createaccount;
 
     @Override
     public int getContentView() {
-        return R.layout.activity_createaccount;
+        return R.layout.activity_register;
     }
 
 
@@ -76,7 +75,7 @@ public class createaccountActivity extends BaseActivity {
                     showMessage("Linkedin kullanıcı adınızı giriniz.");
                 }else{
                     fbaseAuth.createUserWithEmailAndPassword(regEmail.getText().toString(),regPassword.getText().toString())
-                            .addOnCompleteListener(createaccountActivity.this, new OnCompleteListener<AuthResult>() {
+                            .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
@@ -105,7 +104,7 @@ public class createaccountActivity extends BaseActivity {
                                                         showMessage("Bir hata oluştu.");
                                                     }
                                                 });
-                                        startActivity(new Intent(createaccountActivity.this, MainActivity.class));
+                                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                                         finish();
                                     }
                                     else {
