@@ -3,9 +3,8 @@ package com.vbstaj.bizimyerimiz;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.vbstaj.bizimyerimiz.utils.Utils;
 
 public class ForgotPasswordActivity extends BaseActivity {
 
@@ -13,23 +12,18 @@ public class ForgotPasswordActivity extends BaseActivity {
     private Button resetPassword;
     private Button cancel;
 
-
-    private FirebaseAuth fbaseAuth;
-    private FirebaseUser fbaseUser;
-
     @Override
     public int getContentView() {
         return R.layout.activity_forgot_password;
-
     }
 
     @Override
     public void initView() {
 
-        fbaseAuth = FirebaseAuth.getInstance();
-        emailField = (EditText)findViewById(R.id.emailInput);
-        resetPassword = (Button)findViewById(R.id.resetButton);
-        cancel = (Button) findViewById(R.id.cancelButton);
+        Utils.fbaseAuth = FirebaseAuth.getInstance();
+        emailField = findViewById(R.id.emailInput);
+        resetPassword = findViewById(R.id.resetButton);
+        cancel = findViewById(R.id.cancelButton);
 
         cancel.setOnClickListener(view -> {
             startActivity(new Intent(ForgotPasswordActivity.this,MainActivity.class));
@@ -37,7 +31,7 @@ public class ForgotPasswordActivity extends BaseActivity {
         });
 
         resetPassword.setOnClickListener(view -> {
-            fbaseAuth.sendPasswordResetEmail(emailField.getText().toString())
+            Utils.fbaseAuth.sendPasswordResetEmail(emailField.getText().toString())
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             showMessage("Şifre sıfırlama bağlantısı yollanmıştır.");

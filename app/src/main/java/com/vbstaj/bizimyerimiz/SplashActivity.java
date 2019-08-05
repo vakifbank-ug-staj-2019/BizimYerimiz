@@ -2,6 +2,8 @@ package com.vbstaj.bizimyerimiz;
 
 import android.content.Intent;
 
+import com.vbstaj.bizimyerimiz.utils.Utils;
+
 public class SplashActivity extends BaseActivity {
 
     @Override
@@ -9,12 +11,11 @@ public class SplashActivity extends BaseActivity {
         return R.layout.activity_splash;
     }
 
-
     @Override
     public void initView() {
 
-        if(fbaseAuth.getCurrentUser() != null){
-            getLoginUser(fbaseAuth.getCurrentUser().getUid());
+        if(Utils.fbaseAuth.getCurrentUser() != null){
+            getLoginUser(Utils.fbaseAuth.getCurrentUser().getUid());
         }
         new android.os.Handler().postDelayed(
                 () -> {

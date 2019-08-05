@@ -5,16 +5,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.vbstaj.bizimyerimiz.listAdapters.CommentAdapter;
 import com.vbstaj.bizimyerimiz.model.Comment;
 import com.vbstaj.bizimyerimiz.utils.Utils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,13 +19,12 @@ import java.util.List;
 
 public class CommentActivity extends BaseActivity {
 
-    private Button refresh;
     private Button out;
     private Button commentbutton;
     private Button userListButton;
     private CommentAdapter recyclerAdapter;
     private int lastPos = -1;
-    private static final int TIME_INTERVAL = 2000; // 2basma arasındaki saniye en fazla 2 olablir.
+    private static final int TIME_INTERVAL = 2000;
     private long mBackPressed;
     List<Comment> list;
     RecyclerView recycle;
@@ -38,34 +34,27 @@ public class CommentActivity extends BaseActivity {
         return R.layout.activity_comment;
     }
 
-
     @Override
     public void onBackPressed()
     {
         if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
         {
-
             super.onBackPressed();
             return;
-
         }
         else { Toast.makeText(getBaseContext(), "Uygulamadan çıkmak için bir daha basın", Toast.LENGTH_SHORT).show(); }
-
         mBackPressed = System.currentTimeMillis();
     }
+
     @Override
     public void initView() {
+        userListButton = findViewById(R.id.userListButton);
+        out= findViewById (R.id.out);
+        commentbutton= findViewById(R.id.commandButton);
 
-
-        userListButton = (Button)findViewById(R.id.userListButton);
-        out= (Button) findViewById (R.id.out);
-        commentbutton=(Button)findViewById(R.id.commandButton);
-
-        recycle = (RecyclerView) findViewById(R.id.listView);
-        list = new ArrayList<Comment>();
-
+        recycle = findViewById(R.id.listView);
+        list = new ArrayList<>();
         recyclerAdapter = new CommentAdapter(list,this);
-        //RecyclerView.LayoutManager recyce = new GridLayoutManager(this,1);
         RecyclerView.LayoutManager recyce = new LinearLayoutManager(this);
         recycle.setLayoutManager(recyce);
         recycle.setItemAnimator( new DefaultItemAnimator());
@@ -88,12 +77,11 @@ public class CommentActivity extends BaseActivity {
            if(lastPos != -1 && lastPos != pos){
                recyclerAdapter.notifyItemChanged(lastPos);
            }
-
            lastPos = pos;
        });
 
        out.setOnClickListener(view -> {
-           fbaseAuth.signOut();
+           Utils.fbaseAuth.signOut();
            Utils.loggedUser = null;
            Intent i = new Intent(CommentActivity.this, MainActivity.class);
            startActivity(i);
@@ -101,14 +89,13 @@ public class CommentActivity extends BaseActivity {
        });
 
         commentbutton.setOnClickListener(view -> {
-
             Intent y = new Intent(CommentActivity.this, NewCommentActivity.class);
             startActivity(y);
             finish();
 
         });
 
-        databaseFirestore.collection("comments")
+        Utils.databaseFirestore.collection("comments")
                 .addSnapshotListener((value, e) -> {
                     if (e != null) {
                         Log.w("ERROR", "Listen failed.", e);
@@ -126,8 +113,5 @@ public class CommentActivity extends BaseActivity {
                     Collections.sort(list);
                     recycle.setAdapter(recyclerAdapter);
                 });
-
-
-
     }
 }
