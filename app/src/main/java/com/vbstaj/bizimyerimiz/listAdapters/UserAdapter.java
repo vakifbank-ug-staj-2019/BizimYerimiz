@@ -78,7 +78,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder> {
             mailIntent.setType("message/rfc822");
             mailIntent.putExtra(Intent.EXTRA_EMAIL  , new String[]{mylist.getEmail()});
             try {
-                context.startActivity(Intent.createChooser(mailIntent, "Mail yolla"));
+                context.startActivity(Intent.createChooser(mailIntent,mylist.getName() + " " + mylist.getSurname() + " kişisine mail yolla"));
             } catch (android.content.ActivityNotFoundException ex) {
                 Toast.makeText(view.getContext(), "Hiçbir mail uygulaması yüklü değil", Toast.LENGTH_SHORT).show();
             }
@@ -101,6 +101,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHoder> {
             int w = image.getIntrinsicWidth();
             image.setBounds( 0, 0, w, h );
             holder.name.setCompoundDrawables( null, null, image, null );
+        }
+        if(!mylist.isAdmin()){
+            holder.name.setCompoundDrawables( null, null, null, null );
         }
 
 
