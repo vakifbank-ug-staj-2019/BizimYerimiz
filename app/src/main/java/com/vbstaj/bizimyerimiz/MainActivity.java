@@ -38,6 +38,11 @@ public class MainActivity extends BaseActivity {
 
         displayData();
 
+        if(Utils.fbaseAuth.getCurrentUser() != null){
+            startActivity(new Intent(MainActivity.this,SplashActivity.class));
+            finish();
+        }
+
         /**Giriş Yap butonunu çalıştırır.*/
         loginButton.setOnClickListener(view -> {
             String userEmail = emailField.getText().toString();
