@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/textViewStyle</item>
     </style>
 
     <style name="pageBackGround">
@@ -15,10 +16,16 @@
         <item name="android:src">@drawable/main_page_background_black</item>
     </style>
 
+    <style name="textViewStyle">
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:color">@android:color/holo_blue_dark</item>
+    </style>
+
     <style name="editTextStyle">
         <item name="android:textColorHighlight">@color/colorPrimary</item>
         <item name="android:colorControlActivated">@color/colorPrimaryDark</item>
         <item name="android:colorControlNormal">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
 
