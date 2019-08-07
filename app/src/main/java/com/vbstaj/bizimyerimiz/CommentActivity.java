@@ -5,13 +5,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.vbstaj.bizimyerimiz.listAdapters.CommentAdapter;
 import com.vbstaj.bizimyerimiz.model.Comment;
 import com.vbstaj.bizimyerimiz.utils.Utils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,6 +52,8 @@ public class CommentActivity extends BaseActivity {
 
     @Override
     public void initView() {
+
+
         userListButton = findViewById(R.id.userListButton);
         out= findViewById (R.id.out);
         commentbutton= findViewById(R.id.commandButton);
@@ -59,6 +65,8 @@ public class CommentActivity extends BaseActivity {
         recycle.setLayoutManager(recyce);
         recycle.setItemAnimator( new DefaultItemAnimator());
         recycle.setAdapter(recyclerAdapter);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("NewComment");
 
         if(Utils.loggedUser.isAdmin()){
             commentbutton.setVisibility(View.GONE);
@@ -83,6 +91,7 @@ public class CommentActivity extends BaseActivity {
        out.setOnClickListener(view -> {
            Utils.fbaseAuth.signOut();
            Utils.loggedUser = null;
+           FirebaseMessaging.getInstance().unsubscribeFromTopic("NewComment");
            Intent i = new Intent(CommentActivity.this, MainActivity.class);
            startActivity(i);
            finish();
