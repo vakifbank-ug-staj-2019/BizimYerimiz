@@ -17,6 +17,21 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"/>
 
+        <RatingBar
+            android:id="@+id/commentRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            style="?android:attr/ratingBarStyleSmall"
+            android:max="5"
+            android:layout_gravity="center_horizontal"
+            android:stepSize="1"
+            android:layout_marginTop="8dp"
+            android:progressTint="@color/colorPrimary"
+            android:progressBackgroundTint="@android:color/darker_gray"
+            android:secondaryProgressTint="@android:color/white"
+            />
+
     </LinearLayout>
 
     <LinearLayout

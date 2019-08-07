@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +48,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
         holder.name.setText(mylist.getName());
         //holder.content.setText(mylist.getContent());
 
+        holder.rate.setRating(mylist.getRating());
         holder.content.setText(mylist.getContent().length() > 60 ? mylist.getContent().substring(0,60) + "..." : mylist.getContent());
 
         holder.title.setText(mylist.getTitle());
@@ -70,6 +72,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
 
     class MyHoder extends RecyclerView.ViewHolder{
         TextView name,title,content,date;
+        RatingBar rate;
 
 
         public MyHoder(View itemView) {
@@ -79,6 +82,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
             title= (TextView) itemView.findViewById(R.id.titleContent);
             content= (TextView) itemView.findViewById(R.id.textContent);
             date= (TextView) itemView.findViewById(R.id.dateContent);
+            rate = (RatingBar) itemView.findViewById(R.id.commentRating);
 
         }
     }
