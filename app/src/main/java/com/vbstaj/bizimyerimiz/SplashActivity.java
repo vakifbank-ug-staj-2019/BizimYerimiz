@@ -16,7 +16,10 @@ public class SplashActivity extends BaseActivity {
 
         if(Utils.fbaseAuth.getCurrentUser() != null){
             getLoginUser(Utils.fbaseAuth.getCurrentUser().getUid());
+        }else{
+            startActivity(new Intent(SplashActivity.this,MainActivity.class));
         }
+
         new android.os.Handler().postDelayed(
                 () -> {
                     Intent intent = new Intent(SplashActivity.this, CommentActivity.class);
