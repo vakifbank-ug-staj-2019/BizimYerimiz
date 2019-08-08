@@ -48,4 +48,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         });
     }
+
+    public String textCleaner(String text){
+        return text.trim().replaceAll("\\s{2,}", " ").replaceAll("[\\n\\r]"," ");
+    }
 }

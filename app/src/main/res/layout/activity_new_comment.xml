@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NewCommentActivity"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:id="@+id/mainLinear">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,7 +60,7 @@
             android:ems="10"
             android:gravity="start"
             android:hint="@string/addcomment"
-            android:inputType="text"
+            android:inputType="textCapSentences"
             android:padding="12dp"
             android:maxLength="40"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -83,8 +84,7 @@
             android:ems="10"
             android:gravity="start"
             android:hint="@string/addcommenttext"
-            android:inputType="textMultiLine"
-            android:maxLength="240"
+            android:inputType="textCapSentences"
             android:padding="12dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline7"
             app:layout_constraintEnd_toEndOf="parent"
@@ -92,24 +92,6 @@
             app:layout_constraintTop_toBottomOf="@+id/commentTitle"
             app:layout_constraintVertical_bias="0.0"
             style="@style/editTextStyle"/>
-
-        <RatingBar
-            android:id="@+id/newCommentRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:isIndicator="false"
-            style="?android:attr/ratingBarStyle"
-            android:max="5"
-            android:layout_gravity="center_horizontal"
-            android:stepSize="1"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/commentContent"
-            app:layout_constraintRight_toLeftOf="@id/commentButton"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:progressTint="@color/colorPrimaryDark"
-            android:progressBackgroundTint="@android:color/white"
-            android:secondaryProgressTint="@color/colorPrimary"
-            />
 
         <Button
             android:id="@+id/commentButton"
@@ -127,7 +109,8 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/commentContent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            style="@style/textViewStyle" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
@@ -139,4 +122,4 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</RelativeLayout>
+</LinearLayout>
