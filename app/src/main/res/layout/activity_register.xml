@@ -45,6 +45,7 @@
             app:layout_constraintGuide_percent="0.5" />
 
         <EditText
+
             android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,7 +58,7 @@
             android:ems="10"
             android:gravity="start"
             android:hint="@string/loginName"
-            android:inputType="text"
+            android:inputType="textCapSentences"
             android:padding="12dp"
             android:maxLength="25"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -82,7 +83,7 @@
             android:ems="10"
             android:gravity="start"
             android:hint="@string/loginSurname"
-            android:inputType="text"
+            android:inputType="textCapSentences"
             android:padding="12dp"
             android:maxLength="25"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -201,7 +202,7 @@
             android:ems="10"
             android:gravity="start"
             android:hint="@string/country"
-            android:inputType="text"
+            android:inputType="textCapSentences"
             android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

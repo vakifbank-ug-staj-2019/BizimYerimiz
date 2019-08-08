@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_popup"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Deneyiminizi puanlamak ister misiniz?"
+        android:textSize="20dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:fontFamily="@font/montserrat"/>
+
+    <RatingBar
+        android:id="@+id/newCommentRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="false"
+        style="?android:attr/ratingBarStyle"
+        android:max="5"
+        android:layout_gravity="center_horizontal"
+        android:stepSize="1"
+        android:progressTint="@color/colorPrimaryDark"
+        android:progressBackgroundTint="@android:color/darker_gray"
+        android:secondaryProgressTint="@color/colorPrimary"
+        />
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/skipButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_shape_homebutton"
+        android:fontFamily="@font/montserrat"
+        android:text="ATLA"
+        android:textColor="@android:color/white"
+        />
+
+</LinearLayout>

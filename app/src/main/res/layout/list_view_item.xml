@@ -31,6 +31,7 @@
             android:progressTint="@color/colorPrimary"
             android:progressBackgroundTint="@android:color/darker_gray"
             android:secondaryProgressTint="@android:color/white"
+            android:visibility="gone"
             />
 
     </LinearLayout>

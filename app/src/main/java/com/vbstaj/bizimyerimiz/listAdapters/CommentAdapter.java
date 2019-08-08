@@ -46,9 +46,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyHoder>
     public void onBindViewHolder(final MyHoder holder, final int position) {
         Comment mylist = list.get(position);
         holder.name.setText(mylist.getName());
-        //holder.content.setText(mylist.getContent());
-
-        holder.rate.setRating(mylist.getRating());
+        if(mylist.getRating() != 0){
+            holder.rate.setVisibility(View.VISIBLE);
+            holder.rate.setRating(mylist.getRating());
+        }
         holder.content.setText(mylist.getContent().length() > 60 ? mylist.getContent().substring(0,60) + "..." : mylist.getContent());
 
         holder.title.setText(mylist.getTitle());
