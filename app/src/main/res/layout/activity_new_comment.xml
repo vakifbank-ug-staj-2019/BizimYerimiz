@@ -6,7 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".NewCommentActivity"
     android:background="@color/colorPrimary"
-    android:id="@+id/mainLinear">
+    android:id="@+id/mainLinear"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:id="@+id/ll_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:visibility="gone"/>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
