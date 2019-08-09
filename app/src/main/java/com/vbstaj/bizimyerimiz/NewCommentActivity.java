@@ -47,10 +47,10 @@ public class NewCommentActivity extends BaseActivity {
         commentTitle = findViewById(R.id.commentTitle);
         commentContent = findViewById(R.id.commentContent);
 
-        linearLayout1 = findViewById(R.id.mainLinear);
+        linearLayout1 = findViewById(R.id.ll_mask);
 
         commentButton.setOnClickListener(v -> {
-
+            linearLayout1.setVisibility(View.VISIBLE);
             String titleToPush = textCleaner(commentTitle.getText().toString());
             String contentToPush = textCleaner(commentContent.getText().toString());
 
@@ -62,7 +62,7 @@ public class NewCommentActivity extends BaseActivity {
                 ratingBar = customView.findViewById(R.id.newCommentRating);
                 closePopupBtn = (Button) customView.findViewById(R.id.skipButton);
 
-                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
                 popupWindow.showAtLocation(linearLayout1, Gravity.CENTER, 0, 0);
 
